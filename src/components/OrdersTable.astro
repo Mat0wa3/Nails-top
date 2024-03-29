@@ -1,0 +1,111 @@
+<section class="orders">
+    <h2>Órdenes Pendientes</h2>
+    <section class="table-body">
+        <table>
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Servicio</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Juan Pérez</td>
+                    <td>Manicura y pedicura semipermanente, uñas acrilicas, forrado en gel</td>
+                    <td>2024-04-01</td>
+                    <td>10:00 AM</td>
+                    <td>Pendiente</td>
+                    <td class="actions">
+                        <button class="complete-btn">Completar</button>
+                        <button class="cancel-btn">Cancelar</button>
+                        <button class="details-btn">Detalles</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</section>
+
+<style>
+    .orders {
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+        overflow: hidden;
+    }
+
+    .orders h2 {
+        color: #333;
+    }
+
+    .table-body {
+        width: 95%;
+        max-height: calc(89% - .8rem);
+        margin: .8rem auto;
+
+        overflow: auto;
+
+        &::-webkit-scrollbar {
+            width: .5rem;
+            height: .5rem;
+        }
+    }
+
+    .table-body::-webkit-scrollbar-thumb {
+        border-radius: 0.5rem;
+        background-color: #0004;
+        visibility: hidden;
+    }
+
+    .table-body:hover::-webkit-scrollbar-thumb {
+        visibility: visible;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table th,
+    table td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    table th {
+        background-color: #f5f5f5;
+    }
+
+    table tr:hover {
+        background-color: #f9f9f9;
+    }
+
+    .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .6rem;
+    }
+
+    .complete-btn,
+    .cancel-btn,
+    .details-btn {
+        background-color: #ff69b4;
+        color: #fff;
+        border: none;
+        padding: 8px 12px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    .complete-btn:hover,
+    .cancel-btn:hover,
+    .details-btn:hover {
+        background-color: #d74d91;
+    }
+</style>
