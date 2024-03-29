@@ -1,18 +1,39 @@
 
 <header>
-    <div class="container">
-        <div class="logo">
-            <img src="/Nails-top_logo.webp" alt="Logotipo del spa" />
+    <a href="/">
+        <div class="container">
+            <div class="logo">
+                <img src="/Nails-top_logo.webp" alt="Logotipo del spa" />
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#top">Inicio</a></li>
+                    <li><a href="#services">Servicios</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </nav>
         </div>
-        <nav>
-            <ul>
-                <li><a href="#top">Inicio</a></li>
-                <li><a href="#services">Servicios</a></li>
-                <li><a href="#contact">Contacto</a></li>
+        <div class="content">
+            <ul class="menu">
+                <li><a href="#login">Iniciar sesión</a></li>
+                <li><a href="#logout">Cerrar sesión</a></li>
+                <li><a href="#dashboard">Ir al panel</a></li>
             </ul>
-        </nav>
-    </div>
+        </div>
+    </a>
 </header>
+
+<script>
+    const logo = document.querySelector('.logo');
+    const menu = document.querySelector('.content');
+
+    logo?.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        menu.style.visibility = 'visible';
+    })
+
+    document.addEventListener('click', () => menu.style.visibility = 'hidden')
+</script>
 
 <style>
     header {
@@ -30,6 +51,43 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+    }
+
+    .content {
+        visibility: hidden;
+        width: 150px;
+        background-color: #fff;
+        border-radius: 10px;
+        position: absolute;
+        top: 21vh;
+        left: 10vw;
+        transition: scale 0.3s ease;
+    }
+
+    .content .menu {
+        padding: 15px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .content .menu li {
+        list-style: none;
+        width: 100%;
+    }
+
+    .menu a {
+        width: 100%;
+        padding: 10px;
+        transition: background-color 0.3s ease;
+        border-radius: 5px;
+
+        display: flex;
+
+        &:hover {
+            background-color: #f3f3f3;
+        }
     }
 
     .logo {
@@ -69,6 +127,6 @@
     }
 
     nav ul li a:hover {
-        color: #25a790;
+        color: #2ba18f;
     }
 </style>
