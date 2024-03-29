@@ -1,0 +1,74 @@
+
+<header>
+    <div class="container">
+        <div class="logo">
+            <img src="/Nails-top_logo.webp" alt="Logotipo del spa" />
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#top">Inicio</a></li>
+                <li><a href="#services">Servicios</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<style>
+    header {
+        position: sticky;
+        top: 10px;
+        
+        padding: 0.25rem;
+        z-index: 11;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .logo {
+        background-color: #f3f3f3;
+        border-radius: 50%;
+        max-height: 20dvh;
+    }
+
+    .logo img {
+        max-height: 20dvh;
+    }
+
+    nav {
+        float: right;
+        padding: .85rem;
+        border-radius: 9999px;
+        background-color: rgba(100, 100, 100, .2);
+        backdrop-filter: blur(8px);
+    }
+
+    nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav ul li {
+        display: inline-block;
+        margin: 0 10px;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: #333333;
+        font-size: 16px;
+        transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+        color: #25a790;
+    }
+</style>

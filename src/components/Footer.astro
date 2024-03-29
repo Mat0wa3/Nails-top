@@ -1,0 +1,99 @@
+<footer id="contact">
+    <div class="container">
+        <div class="contact">
+            <h2>Contacto</h2>
+            <ul>
+                <li><i class="fa fa-map-marker"></i> Calle Mayor, 123</li>
+                <li><i class="fa fa-phone"></i> +57 1 234 5678</li>
+                <li><i class="fa fa-envelope"></i> info@spadenuñas.com</li>
+            </ul>
+        </div>
+        <div class="social">
+            <h2>Síguenos en nuestras redes sociales</h2>
+            <ul>
+                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<style>
+    footer {
+        background-color: #333333;
+        color: #ffffff;
+        padding: 50px 0;
+        bottom: 0;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .contact {
+        float: left;
+    }
+
+    .contact h2 {
+        font-size: 24px;
+        margin: 0 0 20px 0;
+    }
+
+    .contact ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .contact ul li {
+        margin: 0 0 10px 0;
+    }
+
+    .contact ul li i {
+        margin-right: 10px;
+    }
+
+    .social {
+        float: right;
+    }
+
+    .social h2 {
+        font-size: 24px;
+        margin: 0 0 20px 0;
+    }
+
+    .social ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .social ul li {
+        display: inline-block;
+        margin: 0 10px;
+    }
+
+    .social ul li a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    .social ul li a:hover {
+        color: #ff0000;
+    }
+
+    /* Media queries */
+
+    @media (max-width: 768px) {
+        .contact,
+        .social {
+            float: none;
+            text-align: center;
+        }
+    }
+</style>
