@@ -1,68 +1,66 @@
-<section id="services" class="services">
-    <h2>Nuestros servicios</h2>
+<section id="services" class="section-container">
+    <section class="section-header">
+        <h2>Nuestros servicios</h2>
+    </section>
 
-    <ul>
-        <li>
-            <img src="servicio1.jpg" alt="Servicio 1" />
-            <h3>Manicura y pedicura</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </li>
-        <li>
-            <img src="servicio2.jpg" alt="Servicio 2" />
-            <h3>Uñas acrílicas y de gel</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </li>
-        <li>
-            <img src="servicio3.jpg" loading="lazy" alt="Servicio 3" />
-            <h3>Diseño de uñas</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </li>
-    </ul>
+    <section class="section-body">
+        <ul>
+            <li>
+                <img src="servicio1.jpg" alt="Servicio 1" />
+                <h3>Manicura y pedicura</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </li>
+            <li>
+                <img src="servicio2.jpg" alt="Servicio 2" />
+                <h3>Uñas acrílicas y de gel</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </li>
+            <li>
+                <img src="servicio3.jpg" loading="lazy" alt="Servicio 3" />
+                <h3>Diseño de uñas</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </li>
+        </ul>
+    </section>
 </section>
 
 <style>
-    .services {
-        padding: 2rem 2rem;
-        background-color: rgba(245, 245, 245, 0.9);
+    #services h2 {
+        font-size: 1.4rem;
     }
 
-    .services h2 {
-        font-size: 24px;
-        margin: 0 0 20px 0;
-    }
-
-    .services ul {
+    #services ul {
         list-style: none;
         margin: 0;
-        padding: 0;
+        padding: 10px;
     }
 
-    .services ul li {
+    #services ul li {
         display: inline-block;
         margin: 0 20px 20px 0;
         width: 33.33%;
         text-align: center;
-        border: 1px solid #ddd;
+        border: 1px solid #d3d3d3;
         padding: 20px;
     }
 
-    .services ul li img {
+    #services ul li img {
         max-width: 100px;
         margin: 0 0 20px 0;
     }
 
-    .services ul li h3 {
+    #services ul li h3 {
         font-size: 18px;
         margin: 0 0 10px 0;
     }
 
-    .services ul li p {
+    #services ul li p {
         font-size: 16px;
         margin: 0;
     }
 
     @media (max-width: 768px) {
-        .services ul li {
+        #services ul li {
             width: 100%;
         }
     }

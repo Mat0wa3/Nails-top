@@ -7,9 +7,10 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="#top">Inicio</a></li>
-                    <li><a href="#services">Servicios</a></li>
-                    <li><a href="#contact">Contacto</a></li>
+                    <li><a href="/#top">Inicio</a></li>
+                    <li><a href="/#services">Servicios</a></li>
+                    <li><a href="/#testimonials">Testimonios</a></li>
+                    <li><a href="/#contact">Contacto</a></li>
                 </ul>
             </nav>
         </div>
@@ -17,17 +18,17 @@
             <ul class="menu">
                 <li><a href="#login">Iniciar sesión</a></li>
                 <li><a href="#logout">Cerrar sesión</a></li>
-                <li><a href="#dashboard">Ir al panel</a></li>
+                <li><a href="/employe/">Ir al panel</a></li>
             </ul>
         </div>
     </a>
 </header>
 
 <script>
-    const logo = document.querySelector('.logo');
-    const menu = document.querySelector('.content');
+    const logo: any = document.querySelector('.logo');
+    const menu: any = document.querySelector('.content');
 
-    logo?.addEventListener('contextmenu', (e) => {
+    logo?.addEventListener('contextmenu', (e: any) => {
         e.preventDefault();
         menu.style.visibility = 'visible';
     })
@@ -39,9 +40,9 @@
     header {
         position: sticky;
         top: 10px;
-        
-        padding: 0.25rem;
         z-index: 11;
+
+        margin: 2.25rem auto;
     }
 
     .container {
@@ -101,10 +102,9 @@
     }
 
     nav {
-        float: right;
         padding: .85rem;
         border-radius: 9999px;
-        background-color: rgba(100, 100, 100, .2);
+        background-color: rgba(212, 212, 212, .4);
         backdrop-filter: blur(8px);
     }
 
@@ -128,5 +128,12 @@
 
     nav ul li a:hover {
         color: #2ba18f;
+    }
+
+    @media (max-width: 768px) {
+        nav {
+            padding: .5rem;
+            font-size: 12px;
+        }
     }
 </style>
