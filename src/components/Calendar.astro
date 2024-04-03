@@ -1,0 +1,234 @@
+---
+import ChevronIcon from "../icons/ChevronLeft.astro";
+---
+
+<section>
+    <article class="calendar-header">
+        <p id="current-date">Marzo 2024</p>
+        <input type="date" id="date" hidden/>
+        <div class="icons">
+            <span id="prev"> <ChevronIcon /> </span>
+            <span id="next"> <ChevronIcon class:list={{ "rotate-180": true}} /> </span>
+        </div>
+    </article>
+
+    <article class="calendar-body">
+        <ul id="weeks">
+            <li>Dom</li>
+            <li>Lun</li>
+            <li>Mar</li>
+            <li>Mie</li>
+            <li>Jue</li>
+            <li>Vie</li>
+            <li>Sáb</li>
+        </ul>
+        <ul id="days"></ul>
+    </article>
+</section>
+
+<script defer>
+    let days;
+    const input = document.getElementById("date");
+    const months = [
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre",
+    ];
+
+    const currentDate = document.getElementById("current-date"),
+        daysTag = document.getElementById("days"),
+        prevNextIcon = document.querySelectorAll(".icons span");
+
+    let date = new Date(),
+        currentYear = date.getFullYear(),
+        currentMonth = date.getMonth(),
+        currentFullDate =
+            currentYear + "-0" + (currentMonth + 1) + "-" + date.getDate();
+
+    input.value = currentFullDate;
+
+    const renderButtons = () => {
+        days.forEach((day) => {
+            day.addEventListener("click", (e) => {
+                try{
+                    if (e.target.classList.contains("inactive")) return;
+                    const selectedDate = new Date(currentYear, currentMonth, e.target.innerText);
+                    const dateString = selectedDate.toISOString().slice(0, 10);
+                    document.getElementById("date").value = dateString;
+                    days.forEach((d) => {
+                        d.classList.remove("active");
+                    });
+                    e.target.classList.add("active");
+                } catch (error) {
+                    console.log(error);
+                }
+            });
+        });
+    }
+
+    const renderCalendar = () => {
+        let fistDayofMonth = new Date(currentYear, currentMonth, 1).getDay(),
+            lastDateofMonth = new Date(
+                currentYear,
+                currentMonth + 1,
+                0,
+            ).getDate(),
+            lastDateofLastMonth = new Date(
+                currentYear,
+                currentMonth,
+                0,
+            ).getDate();
+        let dayTag = "";
+
+        for (let i = fistDayofMonth; i > 0; i--) {
+            dayTag += `<li class="inactive">${lastDateofLastMonth - i + 1}</li>`;
+        }
+
+        for (let i = 1; i <= lastDateofMonth; i++) {
+            let isToday =
+                i == date.getDate() &&
+                currentMonth == new Date().getMonth() &&
+                currentYear == new Date().getFullYear()
+                    ? "active"
+                    : "";
+            dayTag += `<li value="${i}" class="${isToday}">${i}</li>`;
+        }
+
+        currentDate.innerText = `${months[currentMonth]} - ${currentYear}`;
+        daysTag.innerHTML = dayTag;
+
+        days = document.querySelectorAll("#days li");
+        renderButtons();
+    };
+
+    renderCalendar();
+
+    prevNextIcon.forEach((icon) => {
+        icon.addEventListener("click", () => {
+            currentMonth =
+                icon.id === "prev" ? currentMonth - 1 : currentMonth + 1;
+            if (currentMonth < 0 || currentMonth > 11) {
+                date = new Date(currentYear, currentMonth);
+                currentYear = date.getFullYear();
+                currentMonth = date.getMonth();
+            } else {
+                date = new Date();
+            }
+
+            renderCalendar();
+        });
+    });
+</script>
+
+<style is:global>
+    section {
+        width: min(100%, 450px);
+        background-color: #fff;
+        border-radius: 10px;
+    }
+
+    .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1.25rem 0;
+    }
+
+    .calendar-header #current-date {
+        font-size: 1.45rem;
+        font-weight: 500;
+    }
+
+    .calendar-header .icons {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .calendar-header .icons span {
+        height: 30px;
+        width: 30px;
+        line-height: 30px;
+        background-color: #f2f2f2;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 9999px;
+        transition: scale 0.2s ease;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .calendar-header .icons span:hover {
+        scale: 1.1;
+    }
+
+    .calendar-body {
+        padding: 1rem;
+    }
+
+    .calendar-body ul {
+        display: flex;
+        flex-wrap: wrap;
+        list-style: none;
+        text-align: center;
+    }
+
+    .calendar-body #days li {
+        cursor: pointer;
+        margin: 10px 0;
+        padding: 10px;
+        z-index: 1;
+    }
+
+    .calendar-body #weeks li {
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+
+    .calendar-body ul li {
+        position: relative;
+        width: calc(100% / 7);
+    }
+
+    .calendar-body #days li::before {
+        position: absolute;
+        content: "";
+        left: 50%;
+        top: 50%;
+        height: 40px;
+        width: 40px;
+        z-index: -1;
+        border-radius: 9999px;
+        transform: translate(-50%, -50%);
+    }
+
+    .rotate-180 {
+        transform: rotate(180deg);
+    }
+
+    #days li:hover::before {
+        background-color: #f2f2f2;
+    }
+
+    #days li.inactive {
+        color: #aaa;
+    }
+
+    #days li.active {
+        color: #fff;
+    }
+
+    #days li.active::before {
+        background-color: #27abe2;
+    }
+</style>
