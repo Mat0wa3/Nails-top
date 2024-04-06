@@ -1,6 +1,9 @@
 <header>
     <a class="container" href="/">
-        <img class="logo" src="/Nails-top_icon.webp" alt="Logotipo del spa" />
+        <picture class="logo">
+            <img src="/Nails-top_icon.webp" alt="Logotipo del spa" />
+            <h3>Nails-top</h3>
+        </picture>
         <nav>
             <ul>
                 <li><a href="/#top">Inicio</a></li>
@@ -40,13 +43,13 @@
         --_animationDistance: 120px;
         --_surfaceColor: #fff5;
 
-        padding: var(--_headerPadding, .29rem 4.9rem);
+        padding: var(--_headerPadding, .1rem 3rem);
         margin-inline: auto;
         margin-block: 0rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background-color: #f2f2f2;
+        background-color: #fff;
 
         width: var(--_headerWidth, auto);
         position: sticky;
@@ -69,7 +72,7 @@
         0%, 100% {
             --_logoDisplay: none;
             --_headerWidth: fit-content;
-            --_headerPadding: 1rem 3rem;
+            --_headerPadding: .5rem 2rem;
             border-radius: 9999px;
         }
 
@@ -113,13 +116,17 @@
         display: flex;
 
         &:hover {
-            background-color: #f3f3f3;
+            background-color: #f2f2f2;
         }
     }
 
     .logo {
-        display: var(--_logoDisplay, block);
+        display: var(--_logoDisplay, flex);
         border-radius: 50%;
+        align-items: center;
+    }
+
+    .logo img {
         max-height: 11dvh;
     }
 
@@ -146,9 +153,13 @@
     }
 
     @media (max-width: 768px) {
-        nav {
-            padding: 0.5rem;
+        header {
+            --_headerPadding: 0.5rem;
             font-size: 12px;
+        }
+
+        .logo h3 {
+            display: none;
         }
     }
 </style>

@@ -1,0 +1,70 @@
+---
+interface Props {
+    id: string
+    name: string
+    price?: number
+    img: string
+    status?: any
+}
+
+const { id, name, price, img, status } = Astro.props
+---
+
+{
+    status === "disabled" && (
+    <input id={id} type="checkbox" name={name} value={name} disabled/>
+    ) || (
+        <input id={id} type="checkbox" name={name} value={name}/>
+    )
+}
+<label for={id}>
+    <img src={img} alt="servicio">
+    <h4>{name}</h4>
+    {
+        price && (
+            <p>${(price).toLocaleString()}</p>
+        )
+    }
+</label>
+
+<style>
+    label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        width: 200px;
+        height: 230px;
+        padding: 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        position: relative;
+        border: 1px solid silver;
+
+        transition: scale 0.3s ease;
+    }
+
+    label:hover {
+        scale: 1.1;
+    }
+
+    input[type="checkbox"] {
+        display: none;
+    }
+
+    input[type="checkbox"]:checked:not([disabled]) + label {
+        border-color: #B87333;
+        color: #B87333;
+        background-color: rgba(184, 115, 50, .2);
+    }
+
+    h4 {
+        font-size: 18px;
+        margin: 0;
+    }
+
+    p {
+        font-size: 14px;
+        margin: 0;
+    }
+</style>

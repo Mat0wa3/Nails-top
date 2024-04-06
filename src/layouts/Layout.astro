@@ -47,11 +47,9 @@ const { title } = Astro.props;
 	body {
 		margin: 0;
 		padding: 0;
-		background-image: url(/BG.jpg);
-		background-size: cover;
-		background-repeat: no-repeat;
-		background-position: center center;
 		min-height: 100dvh;
+		background-image: url(/BG2.jpg);
+		background-size: cover;
 	}
 
 	ol, ul {
@@ -97,6 +95,26 @@ const { title } = Astro.props;
         margin: .8rem auto;
         border-radius: .6rem;
 	}
+
+	.bg1 {
+        position: absolute;
+        inset: 0;
+        z-index: -10;
+        height: 100%;
+        width: 100vw;
+        background-color: #fff;
+        background-image: linear-gradient(to right, #f0f0f0 1px, transparent 1px), linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+        background-size: 6rem 4rem;
+    }
+
+	.bg2 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        background-image: radial-gradient(circle 800px at 100% 200px, #d5c5ff, transparent);
+    }
 
 	@media (prefers-reduced-motion: reduce) {
 		html {

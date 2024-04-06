@@ -1,0 +1,26 @@
+---
+import InputField from "./InputField.astro";
+import UserIcon from "../icons/user.astro";
+import PhoneIcon from "../icons/phone.astro";
+---
+
+<section>
+    <InputField id="name" placeholder="ej: Andrea Zapata" type="text">
+        Ingresa tu nombre
+        <UserIcon slot="icon"/>
+    </InputField>
+    <InputField id="name" placeholder="3003333333" type="text">
+        Ingresa tu celular
+        <PhoneIcon slot="icon"/>
+    </InputField>
+</section>
+
+<style>
+    section {
+        background-color: transparent;
+
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+</style>

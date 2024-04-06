@@ -1,0 +1,51 @@
+---
+const PRODUCTS = [
+    { id: "0", name: 'Pedicura tradicional', price: 18000 },
+    { id: "1", name: 'Manicura tradicional', price: 15000 },
+    { id: "2", name: 'Pedicura semipermanente', price: 35000 },
+    { id: "3", name: 'Manicura semipermanente', price: 35000 },
+    { id: "4", name: 'Press on', price: 70000 },
+    { id: "5", name: 'Forrado en acrilico', price: 45000 },
+    { id: "6", name: 'Retiro de acrilico', price: 15000 },
+    { id: "7", name: 'Retiro de semipermanentemente', price: 8000 },
+    { id: "8", name: 'Pies y manos tradicional', price: 33000 },
+    { id: "9", name: 'Pies y manos semipermanente', price: 70000 },
+    { id: "10", name: 'Pedi spa', price: 30000 },
+    { id: "11", name: 'Retoque Press on', price: 55000 },
+    { id: "12", name: 'Base ruber', price: 45000 },
+    { id: "13", name: 'Forrado con polygel', price: 50000 },
+]
+
+import ServiceCheckbox from './ServiceCheckbox.astro';
+---
+<section>
+    <h4>Elige tus servicios</h4>
+    <div class="servicesList">
+        {
+            PRODUCTS.map((product) => (
+                <div class="service">
+                    <ServiceCheckbox id={product.id} name={product.name} price={product.price} img="/BG.jpg" enabled/>
+                </div>
+            ))
+        }
+        <div class="service">
+            <ServiceCheckbox name="Proximamente" img="/BG.jpg" disabled/>
+        </div>
+    </div>
+</section>
+
+<style>
+    section {
+        background-color: transparent;
+        width: 100%;
+    }
+
+    .servicesList {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    
+</style>
