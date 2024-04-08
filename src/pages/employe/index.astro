@@ -6,7 +6,7 @@ import Layout from "../../layouts/Layout.astro";
 <Layout title="Nails-top Medellín - Empleados">
     <div class="container">
         <section>
-            <OrdersTable />
+            <OrdersTable client:load/>
         </section>
     </div>
 </Layout>
@@ -20,7 +20,6 @@ import Layout from "../../layouts/Layout.astro";
     section {
         width: 100%;
         margin-inline: auto;
-        padding-top: 3rem;
         margin-bottom: 4rem;
     }
 

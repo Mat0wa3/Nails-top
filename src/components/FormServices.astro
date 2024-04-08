@@ -16,20 +16,22 @@ const PRODUCTS = [
     { id: "13", name: 'Forrado con polygel', price: 50000 },
 ]
 
-import ServiceCheckbox from './ServiceCheckbox.astro';
+const { id } = Astro.props
+
+import ServiceCheckbox from "./ServiceCheckbox.astro";
 ---
-<section>
+<section id={id}>
     <h4>Elige tus servicios</h4>
     <div class="servicesList">
         {
             PRODUCTS.map((product) => (
-                <div class="service">
-                    <ServiceCheckbox id={product.id} name={product.name} price={product.price} img="/BG.jpg" enabled/>
+                <div class="services">
+                    <ServiceCheckbox id={product.id} name='service' value={product.name} price={product.price} img="/BG.jpg"/>
                 </div>
             ))
         }
-        <div class="service">
-            <ServiceCheckbox name="Proximamente" img="/BG.jpg" disabled/>
+        <div class="services">
+            <ServiceCheckbox id="next" name="Proximamente" value="" img="/BG.jpg" status="disabled"/>
         </div>
     </div>
 </section>

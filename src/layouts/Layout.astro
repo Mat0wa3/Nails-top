@@ -19,7 +19,7 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body>
+	<body class="bg1">
 		<Header />
 		<slot />
 		<Footer />
@@ -48,8 +48,11 @@ const { title } = Astro.props;
 		margin: 0;
 		padding: 0;
 		min-height: 100dvh;
-		background-image: url(/BG2.jpg);
-		background-size: cover;
+		background-color: #FFDEE9;
+		background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);
+
+		/* background-image: url(/BG2.jpg);
+		background-size: cover; */
 	}
 
 	ol, ul {
@@ -97,14 +100,9 @@ const { title } = Astro.props;
 	}
 
 	.bg1 {
-        position: absolute;
-        inset: 0;
-        z-index: -10;
-        height: 100%;
-        width: 100vw;
         background-color: #fff;
-        background-image: linear-gradient(to right, #f0f0f0 1px, transparent 1px), linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
-        background-size: 6rem 4rem;
+        background-image: url(/BG.jpg);
+        background-size: cover;
     }
 
 	.bg2 {

@@ -1,25 +1,26 @@
+---
+import { Image } from "astro:assets";
+---
 <header>
-    <a class="container" href="/">
+    <a class="container" href="/#top">
         <picture class="logo">
-            <img src="/Nails-top_icon.webp" alt="Logotipo del spa" />
+            <Image src="/Nails-top_icon.webp" alt="Logotipo del spa" width={48} height={48} loading={"eager"} />
             <h3>Nails-top</h3>
         </picture>
-        <nav>
-            <ul>
-                <li><a href="/#top">Inicio</a></li>
-                <li><a href="/#services">Servicios</a></li>
-                <li><a href="/#testimonials">Testimonios</a></li>
-                <li><a href="/#contact">Contacto</a></li>
-            </ul>
-        </nav>
-        <div class="content">
-            <ul class="menu">
-                <li><a href="#login">Iniciar sesión</a></li>
-                <li><a href="#logout">Cerrar sesión</a></li>
-                <li><a href="/employe/">Ir al panel</a></li>
-            </ul>
-        </div>
     </a>
+    <nav>
+        <a href="/#top">Inicio</a>
+        <a href="/#services">Servicios</a>
+        <a href="/#testimonials">Testimonios</a>
+        <a href="/#contact">Contacto</a>
+    </nav>
+    <div class="content">
+        <article class="menu">
+            <a href="#login" aria-label="Iniciar sesión">Iniciar sesión</a>
+            <a href="#logout" aria-label="Cerrar sesión">Cerrar sesión</a>
+            <a href="/employe/" aria-label="Ir al panel">Ir al panel</a>
+        </article>
+    </div>
 </header>
 
 <script>
@@ -43,13 +44,12 @@
         --_animationDistance: 120px;
         --_surfaceColor: #fff5;
 
-        padding: var(--_headerPadding, .1rem 3rem);
+        padding: var(--_headerPadding, 0.1rem 3rem);
         margin-inline: auto;
         margin-block: 0rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background-color: #fff;
 
         width: var(--_headerWidth, auto);
         position: sticky;
@@ -57,23 +57,25 @@
         z-index: 1000;
         animation: stickyNav linear forwards;
 
-        margin-bottom: 4rem;
-
         @supports (animation-timeline: view()) {
             backdrop-filter: blur(0.15rem);
 
             animation-timeline: view();
             animation-range-start: calc(100vh + var(--_animationStartsAfter));
-            animation-range-end: calc(100vh + var(--_animationStartsAfter) + var(--_animationDistance));
+            animation-range-end: calc(
+                100vh + var(--_animationStartsAfter) + var(--_animationDistance)
+            );
         }
     }
 
     @keyframes stickyNav {
-        0%, 100% {
+        0%,
+        100% {
             --_logoDisplay: none;
             --_headerWidth: fit-content;
-            --_headerPadding: .5rem 2rem;
+            --_headerPadding: 0.5rem 2rem;
             border-radius: 9999px;
+            box-shadow: 0 0 0.2rem #4442;
         }
 
         100% {
@@ -130,25 +132,19 @@
         max-height: 11dvh;
     }
 
-    nav ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    nav ul li {
+    nav a {
         display: inline-block;
         margin: 0 10px;
     }
 
-    nav ul li a {
+    nav a {
         text-decoration: none;
         color: #333333;
         font-size: 16px;
         transition: color 0.3s ease;
     }
 
-    nav ul li a:hover {
+    nav a:hover {
         color: #2ba18f;
     }
 

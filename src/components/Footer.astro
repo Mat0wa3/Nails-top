@@ -1,42 +1,38 @@
+---
+import FacebookIcon from "../icons/facebook.astro";
+import InstagramIcon from "../icons/instagram.astro";
+import TiktokIcon from "../icons/tiktok.astro";
+---
+
 <footer id="contact">
-    <div class="container">
-        <div class="contact">
-            <h2>Contacto</h2>
-            <ul>
-                <li><i class="fa fa-map-marker"></i> Calle Mayor, 123</li>
-                <li><i class="fa fa-phone"></i> +57 1 234 5678</li>
-                <li><i class="fa fa-envelope"></i> info@spadenuñas.com</li>
-            </ul>
-        </div>
-        <div class="social">
-            <h2>Síguenos en nuestras redes sociales</h2>
-            <ul>
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-            </ul>
-        </div>
+    <div class="contact">
+        <h2>Contacto</h2>
+        <ul>
+            <li><i class="fa fa-map-marker"></i>Cra 80a 112-56, Medellín, Colombia</li>
+            <li><i class="fa fa-phone"></i> +57 304 6078274</li>
+            <li><i class="fa fa-envelope"></i> 
+            nails.top.nt@gmail.com</li>
+        </ul>
+    </div>
+    <div class="social">
+        <h2>Síguenos en nuestras redes sociales</h2>
+        <ul>
+            <li><a href="https://www.facebook.com/profile.php?id=61558026033879" target="_blank" rel="noopener noreferrer" aria-label="facebook"><FacebookIcon /></a></li>
+            <li><a href="https://www.instagram.com/nails.top.nt/" target="_blank" rel="noopener noreferrer" aria-label="instagram"><InstagramIcon /></a></li>
+            <li><a href="https://www.tiktok.com/@nailstop.nt" target="_blank" rel="noopener noreferrer" aria-label="tiktok"><TiktokIcon /></a></li>
+        </ul>
     </div>
 </footer>
 
 <style>
     footer {
-        background-color: #333333;
-        color: #ffffff;
-        padding: 50px 0;
-        bottom: 0;
+        background-color: #333;
+        color: #fff;
+        padding: 2rem 2rem;
 
         display: flex;
-        flex-direction: column;
-    }
-
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    .contact {
-        float: left;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .contact h2 {
@@ -56,10 +52,6 @@
 
     .contact ul li i {
         margin-right: 10px;
-    }
-
-    .social {
-        float: right;
     }
 
     .social h2 {
@@ -84,7 +76,7 @@
     }
 
     .social ul li a:hover {
-        color: #ff0000;
+        color: #208174;
     }
 
     /* Media queries */

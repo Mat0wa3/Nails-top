@@ -1,3 +1,11 @@
+---
+import { getOrders } from "../db/orders";
+
+const orders = await getOrders();
+if (!orders) {
+    throw new Error("No se encontraron ordenes");
+}
+---
 <section class="orders">
     <section class="section-header">
         <h2>Órdenes Pendientes</h2>
@@ -15,66 +23,22 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Juan Pérez</td>
-                    <td>Manicura y pedicura semipermanente, uñas acrilicas, forrado en gel</td>
-                    <td>2024-04-01</td>
-                    <td>10:00 AM</td>
-                    <td>Pendiente</td>
-                    <td class="actions">
-                        <button class="complete-btn">Completar</button>
-                        <button class="cancel-btn">Cancelar</button>
-                        <button class="details-btn">Detalles</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Juan Pérez</td>
-                    <td>Manicura y pedicura semipermanente, uñas acrilicas, forrado en gel</td>
-                    <td>2024-04-01</td>
-                    <td>10:00 AM</td>
-                    <td>Pendiente</td>
-                    <td class="actions">
-                        <button class="complete-btn">Completar</button>
-                        <button class="cancel-btn">Cancelar</button>
-                        <button class="details-btn">Detalles</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Juan Pérez</td>
-                    <td>Manicura y pedicura semipermanente, uñas acrilicas, forrado en gel</td>
-                    <td>2024-04-01</td>
-                    <td>10:00 AM</td>
-                    <td>Pendiente</td>
-                    <td class="actions">
-                        <button class="complete-btn">Completar</button>
-                        <button class="cancel-btn">Cancelar</button>
-                        <button class="details-btn">Detalles</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Juan Pérez</td>
-                    <td>Manicura y pedicura semipermanente, uñas acrilicas, forrado en gel</td>
-                    <td>2024-04-01</td>
-                    <td>10:00 AM</td>
-                    <td>Pendiente</td>
-                    <td class="actions">
-                        <button class="complete-btn">Completar</button>
-                        <button class="cancel-btn">Cancelar</button>
-                        <button class="details-btn">Detalles</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Juan Pérez</td>
-                    <td>Manicura y pedicura semipermanente, uñas acrilicas, forrado en gel</td>
-                    <td>2024-04-01</td>
-                    <td>10:00 AM</td>
-                    <td>Pendiente</td>
-                    <td class="actions">
-                        <button class="complete-btn">Completar</button>
-                        <button class="cancel-btn">Cancelar</button>
-                        <button class="details-btn">Detalles</button>
-                    </td>
-                </tr>
+                {
+                    orders.map((order) => (
+                        <tr>
+                            <td>{order.name}</td>
+                            <td>{order.services.map((service: any, index: any) => (index === order.services.length - 1 ? `${service.name}` : `${service.name}, `))}</td>
+                            <td>{order.date}</td>
+                            <td>{order.time}</td>
+                            <td>{order.status}</td>
+                            <td class="actions">
+                                <button class="complete-btn">Completar</button>
+                                <button class="cancel-btn">Cancelar</button>
+                                <button class="details-btn">Detalles</button>
+                            </td>
+                        </tr>
+                    ))
+                }
             </tbody>
         </table>
     </section>
@@ -83,9 +47,8 @@
 <style>
     .orders {
         width: 82vw;
-        height: 90vh;
         background-color: #fff5;
-        margin: 0 auto;
+        margin: 4rem auto;
 
         backdrop-filter: blur(7px);
         box-shadow: 0 .4rem .8rem #0005;
@@ -98,10 +61,14 @@
         color: #333;
     }
 
+    .section-header {
+        background-color: #f0f0f0;
+    }
+
     .section-body {
         width: 95%;
         max-height: calc(89% - .8rem);
-        background-color: #fffb;
+        background-color: #ffffff;
 
         margin: .8rem auto;
         border-radius: .6rem;
@@ -148,7 +115,7 @@
     }
 
     table tr:hover {
-        background-color: #f9f9f9;
+        background-color: #eee;
     }
 
     .actions {
@@ -160,7 +127,7 @@
     .complete-btn,
     .cancel-btn,
     .details-btn {
-        background-color: #ff69b4;
+        background-color: #2ba18f;
         color: #fff;
         border: none;
         padding: 8px 12px;
@@ -171,6 +138,6 @@
     .complete-btn:hover,
     .cancel-btn:hover,
     .details-btn:hover {
-        background-color: #d74d91;
+        background-color: #208175;
     }
 </style>

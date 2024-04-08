@@ -6,7 +6,7 @@ const { id, type, placeholder } = Astro.props
     <slot />
     <div class="input">
         <span><slot name="icon" /></span>
-        <input type={type} id={id} placeholder={placeholder} required/>
+        <input type={type} id={id} name={id} placeholder={placeholder} required/>
     </div>
 </label>
 

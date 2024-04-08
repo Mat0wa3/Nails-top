@@ -5,7 +5,8 @@ import ChevronIcon from "../icons/ChevronLeft.astro";
 <section>
     <article class="calendar-header">
         <p id="current-date">Marzo 2024</p>
-        <input type="date" id="date" hidden/>
+        <input type="date" id="date" name="date" hidden/>
+
         <div class="icons">
             <span id="prev"> <ChevronIcon /> </span>
             <span id="next"> <ChevronIcon class:list={{ "rotate-180": true}} /> </span>
@@ -26,9 +27,8 @@ import ChevronIcon from "../icons/ChevronLeft.astro";
     </article>
 </section>
 
-<script defer>
+<script defer is:inline>
     let days;
-    const input = document.getElementById("date");
     const months = [
         "Enero",
         "Febrero",
@@ -49,12 +49,10 @@ import ChevronIcon from "../icons/ChevronLeft.astro";
         prevNextIcon = document.querySelectorAll(".icons span");
 
     let date = new Date(),
-        currentYear = date.getFullYear(),
-        currentMonth = date.getMonth(),
-        currentFullDate =
-            currentYear + "-0" + (currentMonth + 1) + "-" + date.getDate();
-
-    input.value = currentFullDate;
+    currentYear = date.getFullYear(),
+    currentMonth = date.getMonth(),
+    currentFullDate = date.toISOString().slice(0, 10);
+    document.getElementById("date").value = currentFullDate;
 
     const renderButtons = () => {
         days.forEach((day) => {

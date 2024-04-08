@@ -5,7 +5,7 @@ import SelectList from "./SelectList.astro";
 import UserForm from "./UserForm.astro";
 ---
 
-<form class="section-container">
+<form class="section-container" method="post">
     <section class="section-header">
         <h2>Ordena tu cita</h2>
     </section>
@@ -16,8 +16,8 @@ import UserForm from "./UserForm.astro";
             <option value="Daniela">Daniela</option>
             <option value="First">No tengo preferencia</option>
         </SelectList>
-        <FormServices />
-        <Calendar />
+        <FormServices id="services"/>
+        <Calendar/>
         <h4>Elige una hora</h4>
         <SelectList id="time" name="time" placeholder="Selecciona">
             <optgroup label="AM">
@@ -39,10 +39,99 @@ import UserForm from "./UserForm.astro";
     </section>
 </form>
 
+<script is:inline>
+    const btn = document.querySelector(".btn");
+    const form = document.querySelector("form");
+    const manicurista = document.getElementById("manicurista");
+    const hour = document.getElementById("time");
+    const name = document.getElementById("name");
+    const phone = document.getElementById("phone");
+    const checkBoxes = document.querySelectorAll("input[name=service]");
+    btn.addEventListener("click", async(e) => {
+        e.preventDefault()
+        const atLeastOneChecked = [...checkBoxes].some(c => c.checked);
+        const services = document.getElementsByName("service");
+        if (manicurista.value === "") {
+            alert("Selecciona un manicurista")
+            window.location.href = "#top";
+            return
+        };
+        if (!atLeastOneChecked) {
+            alert(`Selecciona al menos un servicio`);
+            window.location.href = "#services";
+            return
+        }
+        if (hour.value === "") {
+            alert("Selecciona una hora")
+            hour.focus()
+            return
+        };
+        if (name.value === "") {
+            alert("Ingresa tu nombre")
+            name.focus()
+            return
+        };
+        if (phone.value === "") {
+            alert("Ingresa tu celular")
+            phone.focus()
+            return
+        }
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+        const order = {
+            services: [],
+            date: '',
+            time: '',
+            name: '',
+            phone: '',
+            status: 'Pendiente',
+            total: 0
+        };
+
+        const objectServices = formData.getAll("service");
+        const objectDate = formData.get("date");
+        const objectTime = formData.get("time");
+        const objectName = formData.get("name");
+        const objectPhone = formData.get("phone");
+
+        services.forEach(s  => {
+            if (s.checked) {
+                order.services.push({
+                    id: s.id,
+                    name: s.value,
+                    price: Number(s.className)
+                })
+                order.total += Number(s.className)
+            }
+        });
+        
+        order.date = objectDate;
+        order.time = objectTime;
+        order.name = objectName;
+        order.phone = objectPhone;
+
+        try {
+            await fetch('/api/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(order)
+            });
+            alert("Orden registrada");
+            window.location.href = "/";
+        } catch (error) {
+            console.error(error);
+        }
+    });
+</script>
+
 <style>
     .section-body {
         text-align: center;
         position: relative;
+        background-color: transparent;
 
         display: flex;
         flex-direction: column;

@@ -2,24 +2,26 @@
 interface Props {
     id: string
     name: string
+    value: string
     price?: number
     img: string
-    status?: any
+    status?: string
 }
 
-const { id, name, price, img, status } = Astro.props
+const { id, name, value, price, img, status } = Astro.props
+import { Image } from 'astro:assets'
 ---
 
 {
     status === "disabled" && (
-    <input id={id} type="checkbox" name={name} value={name} disabled/>
+    <input id={id} type="checkbox" name={name} value={value} disabled/>
     ) || (
-        <input id={id} type="checkbox" name={name} value={name}/>
+        <input id={id} type="checkbox" name={name} value={value} class={`${price}`}/>
     )
 }
 <label for={id}>
-    <img src={img} alt="servicio">
-    <h4>{name}</h4>
+    <Image src={img} width={200} height={200} alt=servicio loading={"eager"}/>
+    <h4>{value}</h4>
     {
         price && (
             <p>${(price).toLocaleString()}</p>
@@ -39,7 +41,7 @@ const { id, name, price, img, status } = Astro.props
         border-radius: 10px;
         cursor: pointer;
         position: relative;
-        border: 1px solid silver;
+        border: 1px solid #ddd;
 
         transition: scale 0.3s ease;
     }

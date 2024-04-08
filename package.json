@@ -6,14 +6,15 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
+    "begin": "node dist/server/entry.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/check": "^0.5.10",
     "@astrojs/node": "^8.2.5",
-    "astro": "^4.5.10",
+    "astro": "^4.5.16",
     "mongodb": "^6.5.0",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.4"
   }
 }
