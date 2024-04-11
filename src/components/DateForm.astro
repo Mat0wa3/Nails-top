@@ -85,6 +85,7 @@ import UserForm from "./UserForm.astro";
             time: '',
             name: '',
             phone: '',
+            manicurista: '',
             status: 'Pendiente',
             total: 0
         };
@@ -94,6 +95,7 @@ import UserForm from "./UserForm.astro";
         const objectTime = formData.get("time");
         const objectName = formData.get("name");
         const objectPhone = formData.get("phone");
+        const objectManicurista = formData.get("manicurista");
 
         services.forEach(s  => {
             if (s.checked) {
@@ -110,6 +112,7 @@ import UserForm from "./UserForm.astro";
         order.time = objectTime;
         order.name = objectName;
         order.phone = objectPhone;
+        order.manicurista = objectManicurista
 
         try {
             await fetch('/api/orders', {

@@ -1,10 +1,19 @@
 ---
 import { Image } from "astro:assets";
+
+const username = Astro.cookies.get("user-name");
 ---
+
 <header>
     <a class="container" href="/#top">
         <picture class="logo">
-            <Image src="/Nails-top_icon.webp" alt="Logotipo del spa" width={48} height={48} loading={"eager"} />
+            <Image
+                src="/Nails-top_icon.webp"
+                alt="Logotipo del spa"
+                width={48}
+                height={48}
+                loading={"eager"}
+            />
             <h3>Nails-top</h3>
         </picture>
     </a>
@@ -16,18 +25,21 @@ import { Image } from "astro:assets";
     </nav>
     <div class="content">
         <article class="menu">
-            <a href="#login" aria-label="Iniciar sesión">Iniciar sesión</a>
-            <a href="#logout" aria-label="Cerrar sesión">Cerrar sesión</a>
-            <a href="/employe/" aria-label="Ir al panel">Ir al panel</a>
+            <a href="#logout" class="logout" id="#logout" aria-label="Cerrar sesión">Cerrar sesión</a>
+            <a class="panel" id="panel" href="/employe/" aria-label="Ir al panel">Ir al panel</a>
+            <a href="/employe/SignIn" class="login" id="#login" aria-label="Iniciar sesión">Iniciar sesión</a>
         </article>
     </div>
 </header>
 
-<script>
-    const header: any = document.querySelector("header");
-    const menu: any = document.querySelector(".content");
+<script is:inline>
+    const header = document.querySelector("header");
+    const menu = document.querySelector(".content");
+    const login = document.querySelector(".login");
+    const logout = document.querySelector(".logout");
+    const panel = document.querySelector(".panel");
 
-    header?.addEventListener("contextmenu", (e: any) => {
+    header?.addEventListener("contextmenu", (e) => {
         e.preventDefault();
         menu.style.visibility = "visible";
     });
@@ -36,6 +48,44 @@ import { Image } from "astro:assets";
         "click",
         () => (menu.style.visibility = "hidden"),
     );
+
+    logout.addEventListener("click", () => {
+        localStorage.removeItem("user-name");
+        localStorage.removeItem("user-email");
+        localStorage.removeItem("user-phone");
+        cookieStore.delete("user-email");
+        cookieStore.delete("user-name");
+        cookieStore.delete("user-phone");
+        sessionStorage.removeItem("user-email");
+        sessionStorage.removeItem("user-name");
+        sessionStorage.removeItem("user-phone");
+        window.location.href = "/";
+    });
+
+    const checkSession = () => {
+
+        if (!localStorage.getItem("user-name")) {
+            login.style.display = "block";
+            logout.style.display = "none";
+            panel.style.display = "none";
+            return;
+        }
+
+        if (localStorage.getItem("user-name")) {
+            sessionStorage.setItem("user-name", localStorage.getItem("user-name"));
+            sessionStorage.setItem("user-email", localStorage.getItem("user-email"));
+            sessionStorage.setItem("user-phone", localStorage.getItem("user-phone"));
+            cookieStore.set('user-name', localStorage.getItem("user-name"));
+            cookieStore.set('user-email', localStorage.getItem("user-email"));
+            cookieStore.set('user-phone', localStorage.getItem("user-phone"));
+            login.style.display = "none";
+            logout.style.display = "block";
+            panel.style.display = "block";
+            return;
+        }
+    }
+
+    checkSession();
 </script>
 
 <style>
@@ -44,7 +94,7 @@ import { Image } from "astro:assets";
         --_animationDistance: 120px;
         --_surfaceColor: #fff5;
 
-        padding: var(--_headerPadding, 0.1rem 3rem);
+        padding: var(--_headerPadding, 0.1rem 4.8rem);
         margin-inline: auto;
         margin-block: 0rem;
         display: flex;
@@ -74,6 +124,8 @@ import { Image } from "astro:assets";
             --_logoDisplay: none;
             --_headerWidth: fit-content;
             --_headerPadding: 0.5rem 2rem;
+            --_menuTop: 6.5vh;
+            --_menuLeft: 1vh;
             border-radius: 9999px;
             box-shadow: 0 0 0.2rem #4442;
         }
@@ -91,8 +143,8 @@ import { Image } from "astro:assets";
         background-color: #fff;
         border-radius: 10px;
         position: absolute;
-        top: 13vh;
-        left: 3vw;
+        top: var(--_menuTop, 11vh);
+        left: var(--_menuLeft, 3vh);
         transition: scale 0.3s ease;
     }
 
@@ -114,6 +166,7 @@ import { Image } from "astro:assets";
         padding: 10px;
         transition: background-color 0.3s ease;
         border-radius: 5px;
+        cursor: pointer;
 
         display: flex;
 
