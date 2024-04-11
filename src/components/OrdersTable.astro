@@ -1,7 +1,9 @@
 ---
 import { getOrders } from "../db/orders";
 
-const orders = await getOrders();
+const username = Astro.cookies.get("user-name");
+
+const orders = await getOrders(username?.value);
 if (!orders) {
     throw new Error("No se encontraron ordenes");
 }
