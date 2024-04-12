@@ -34,9 +34,8 @@ if (!orders) {
                             <td>{order.time}</td>
                             <td>{order.status}</td>
                             <td class="actions">
-                                <button class="complete-btn">Completar</button>
-                                <button class="cancel-btn">Cancelar</button>
-                                <button class="details-btn">Detalles</button>
+                                <a target="_blank" rel="noopener noreferrer" href={`/employe/Facture?name=${order.name}`} class="complete-btn">Factura</a>
+                                <button id={order.name} class="cancel-btn">Cancelar</button>
                             </td>
                         </tr>
                     ))
@@ -45,6 +44,22 @@ if (!orders) {
         </table>
     </section>
 </section>
+
+<script is:inline>
+    const cancelBtns = document.querySelectorAll(".cancel-btn");
+    cancelBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const name = btn.id;
+            const res = confirm("¿Quieres cancelar esta orden?");
+            if (!res) return;
+            fetch(`/api/remove`, {
+                method: "POST",
+                body: JSON.stringify({ name: name }),
+            })
+            location.reload();
+        })
+    })
+</script>
 
 <style>
     .orders {
@@ -135,6 +150,8 @@ if (!orders) {
         padding: 8px 12px;
         cursor: pointer;
         border-radius: 4px;
+        font-size: 16px;
+        line-height: 1;
     }
 
     .complete-btn:hover,

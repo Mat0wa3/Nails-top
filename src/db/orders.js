@@ -6,8 +6,20 @@ export const getOrders = async (manicurista) => {
     return result;
 }
 
+export const getOrder = async (id) => {
+    const orders = await Orders();
+    const result = await orders.findOne({ name: id });
+    return result;
+}
+
 export const createOrder = async (order) => {
     const orders = await Orders();
     const result = await orders.insertOne(order);
+    return result;
+}
+
+export const deleteOrder = async (id) => {
+    const orders = await Orders();
+    const result = await orders.deleteOne({ name: id });
     return result;
 }
