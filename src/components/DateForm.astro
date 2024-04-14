@@ -3,6 +3,9 @@ import Calendar from "./Calendar.astro";
 import FormServices from "./FormServices.astro";
 import SelectList from "./SelectList.astro";
 import UserForm from "./UserForm.astro";
+
+import { OrderList } from "@/db/orders";
+const ORDERS = await OrderList();
 ---
 
 <form class="section-container" method="post">
@@ -11,13 +14,17 @@ import UserForm from "./UserForm.astro";
     </section>
     <section class="section-body">
         <label for="manicurista">¿Con quién quieres la cita?</label>
-        <SelectList id="manicurista" name="manicurista" placeholder="Selecciona">
+        <SelectList
+            id="manicurista"
+            name="manicurista"
+            placeholder="Selecciona"
+        >
             <option value="Laura">Laura</option>
             <option value="Daniela">Daniela</option>
             <option value="First">No tengo preferencia</option>
         </SelectList>
-        <FormServices id="services"/>
-        <Calendar/>
+        <FormServices id="services" />
+        <Calendar />
         <h4>Elige una hora</h4>
         <SelectList id="time" name="time" placeholder="Selecciona">
             <optgroup label="AM">
@@ -39,7 +46,7 @@ import UserForm from "./UserForm.astro";
     </section>
 </form>
 
-<script is:inline>
+<script is:inline define:vars={{ ORDERS }}>
     const btn = document.querySelector(".btn");
     const form = document.querySelector("form");
     const manicurista = document.getElementById("manicurista");
@@ -47,85 +54,104 @@ import UserForm from "./UserForm.astro";
     const name = document.getElementById("name");
     const phone = document.getElementById("phone");
     const checkBoxes = document.querySelectorAll("input[name=service]");
-    btn.addEventListener("click", async(e) => {
-        e.preventDefault()
-        const atLeastOneChecked = [...checkBoxes].some(c => c.checked);
+    btn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        const atLeastOneChecked = [...checkBoxes].some((c) => c.checked);
         const services = document.getElementsByName("service");
         if (manicurista.value === "") {
-            alert("Selecciona un manicurista")
+            alert("Selecciona un manicurista");
             window.location.href = "#top";
-            return
-        };
+            return;
+        }
         if (!atLeastOneChecked) {
             alert(`Selecciona al menos un servicio`);
             window.location.href = "#services";
-            return
+            return;
         }
         if (hour.value === "") {
-            alert("Selecciona una hora")
-            hour.focus()
-            return
-        };
+            alert("Selecciona una hora");
+            hour.focus();
+            return;
+        }
         if (name.value === "") {
-            alert("Ingresa tu nombre")
-            name.focus()
-            return
-        };
+            alert("Ingresa tu nombre");
+            name.focus();
+            return;
+        }
         if (phone.value === "") {
-            alert("Ingresa tu celular")
-            phone.focus()
-            return
+            alert("Ingresa tu celular");
+            phone.focus();
+            return;
         }
 
         const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
         const order = {
             services: [],
-            date: '',
-            time: '',
-            name: '',
-            phone: '',
-            manicurista: '',
-            status: 'Pendiente',
-            total: 0
+            date: "",
+            time: "",
+            name: "",
+            phone: "",
+            manicurista: "",
+            status: "Pendiente",
+            total: 0,
         };
 
-        const objectServices = formData.getAll("service");
         const objectDate = formData.get("date");
         const objectTime = formData.get("time");
         const objectName = formData.get("name");
         const objectPhone = formData.get("phone");
         const objectManicurista = formData.get("manicurista");
 
-        services.forEach(s  => {
+        services.forEach((s) => {
             if (s.checked) {
                 order.services.push({
                     id: s.id,
                     name: s.value,
-                    price: Number(s.className)
-                })
-                order.total += Number(s.className)
+                    price: Number(s.className),
+                });
+                order.total += Number(s.className);
             }
         });
-        
+
         order.date = objectDate;
         order.time = objectTime;
         order.name = objectName;
         order.phone = objectPhone;
-        order.manicurista = objectManicurista
+        order.manicurista = objectManicurista;
 
-        try {
-            await fetch('/api/orders', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(order)
-            });
-            alert("Orden registrada");
-            window.location.href = "/";
-        } catch (error) {
-            console.error(error);
+        let dated = false;
+
+        ORDERS.forEach((o) => {
+            if (
+                o.date === objectDate &&
+                o.time === objectTime &&
+                o.manicurista === objectManicurista
+            ) {
+                dated = true;
+            }
+            return dated;
+        });
+
+        if (dated) {
+            alert(
+                "Ya hay una cita agendada a esta hora y fecha con este manicurista",
+            );
+            window.location.href = "#top";
+            return;
+        } else {
+            try {
+                await fetch("/api/orders", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(order),
+                });
+                alert("Orden registrada");
+                window.location.href = "/";
+            } catch (error) {
+                console.error(error);
+            }
         }
     });
 </script>

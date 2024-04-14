@@ -1,5 +1,11 @@
 import { Orders } from "./mongodb";
 
+export const OrderList = async () => {
+    const orders = await Orders();
+    const result = await orders.find({}).toArray();
+    return result;
+}
+
 export const getOrders = async (manicurista) => {
     const orders = await Orders();
     const result = await orders.find({ manicurista : manicurista }).toArray();
