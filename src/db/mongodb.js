@@ -4,15 +4,9 @@ const uri = import.meta.env.MONGODB_URI;
 const options = {};
 
 export const connectToDatabase = async () => {
-    try {
-        const client = new MongoClient(uri, options);
-        await client.connect();
-        return client;
-    } catch (error) {
-        console.error(error);
-    } finally {
-        await client.close();
-    }
+    const client = new MongoClient(uri, options);
+    await client.connect();
+    return client;
 };
 
 export const Orders = async () => {

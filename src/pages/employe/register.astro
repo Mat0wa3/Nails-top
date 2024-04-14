@@ -1,12 +1,12 @@
 ---
-import OrdersTable from "../../components/OrdersTable.astro";
-import Layout from "../../layouts/Layout.astro";
+import Layout from "@/layouts/Layout.astro";
+import UserSignup from "@/components/UserSignup.astro";
 ---
 
-<Layout title="Nails-top Medellín - Empleados">
+<Layout title="Nails-top - Empleados">
     <main class="container">
         <section>
-            <OrdersTable/>
+            <UserSignup />
         </section>
     </main>
 </Layout>
@@ -14,7 +14,7 @@ import Layout from "../../layouts/Layout.astro";
 <style>
     main {
         color: #333333;
-        padding-inline: 2rem;
+        padding: 2rem;
     }
 
     section {

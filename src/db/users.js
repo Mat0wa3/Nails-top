@@ -1,8 +1,8 @@
 import { Users } from "./mongodb";
 
-export const getUser = async (phone) => {
+export const getUser = async (user, password) => {
     const users = await Users();
-    const result = await users.findOne({ phone });
+    const result = await users.findOne({ email: user, password: password });
     return result;
 }
 

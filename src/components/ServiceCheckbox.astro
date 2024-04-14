@@ -1,33 +1,63 @@
 ---
 interface Props {
-    id: string
-    name: string
-    value: string
-    price?: number
-    img: string
-    status?: string
+    id: string;
+    name: string;
+    value: string;
+    price?: number;
+    img: string;
+    status?: string;
 }
 
-const { id, name, value, price, img, status } = Astro.props
-import { Image } from 'astro:assets'
+const { id, name, value, price, img, status } = Astro.props;
+import { Image } from "astro:assets";
 ---
 
 {
-    status === "disabled" && (
-    <input id={id} type="checkbox" name={name} value={value} disabled/>
-    ) || (
-        <input id={id} type="checkbox" name={name} value={value} class={`${price}`}/>
+    (status === "disabled" && (
+        <>
+            <input
+                id={id}
+                class="disabled"
+                type="checkbox"
+                name={name}
+                value={value}
+                disabled
+            />
+            <label for={id} class="disabled">
+                <Image
+                    src={img}
+                    width={200}
+                    height={200}
+                    alt="servicio"
+                    loading={"eager"}
+                />
+                <h4>{value}</h4>
+                {price && <p>${price.toLocaleString()}</p>}
+            </label>
+        </>
+    )) || (
+        <>
+            <input
+                id={id}
+                type="checkbox"
+                name={name}
+                value={value}
+                class={`${price}`}
+            />
+            <label for={id}>
+                <Image
+                    src={img}
+                    width={200}
+                    height={200}
+                    alt="servicio"
+                    loading={"eager"}
+                />
+                <h4>{value}</h4>
+                {price && <p>${price.toLocaleString()}</p>}
+            </label>
+        </>
     )
 }
-<label for={id}>
-    <Image src={img} width={200} height={200} alt=servicio loading={"eager"}/>
-    <h4>{value}</h4>
-    {
-        price && (
-            <p>${(price).toLocaleString()}</p>
-        )
-    }
-</label>
 
 <style>
     label {
@@ -46,6 +76,15 @@ import { Image } from 'astro:assets'
         transition: scale 0.3s ease;
     }
 
+    .disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    .disabled:is(label:hover) {
+        scale: 1;
+    } 
+
     label:hover {
         scale: 1.1;
     }
@@ -55,9 +94,9 @@ import { Image } from 'astro:assets'
     }
 
     input[type="checkbox"]:checked:not([disabled]) + label {
-        border-color: #B87333;
-        color: #B87333;
-        background-color: rgba(184, 115, 50, .2);
+        border-color: #b87333;
+        color: #b87333;
+        background-color: rgba(184, 115, 50, 0.2);
     }
 
     h4 {

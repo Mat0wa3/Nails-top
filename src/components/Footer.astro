@@ -1,4 +1,8 @@
 ---
+import MapDotIcon from "@/icons/MapDot.astro";
+import WhatsappIcon from "@/icons/whatsapp.astro";
+import MailIcon from "@/icons/mail.astro";
+
 import FacebookIcon from "../icons/facebook.astro";
 import InstagramIcon from "../icons/instagram.astro";
 import TiktokIcon from "../icons/tiktok.astro";
@@ -8,10 +12,9 @@ import TiktokIcon from "../icons/tiktok.astro";
     <div class="contact">
         <h2>Contacto</h2>
         <ul>
-            <li><i class="fa fa-map-marker"></i>Cra 80a 112-56, Medellín, Colombia</li>
-            <li><i class="fa fa-phone"></i> +57 304 6078274</li>
-            <li><i class="fa fa-envelope"></i> 
-            nails.top.nt@gmail.com</li>
+            <li><MapDotIcon /><a target="_blank" rel="noopener noreferrer" href="https://maps.app.goo.gl/R7NxRzBj28wTWaUh9"> Cra 80a 112-56, Medellín, Colombia</a></li>
+            <li><WhatsappIcon /><a target="_blank" rel="noopener noreferrer" href="https://wa.me/573046078274"> +57 304 6078274</a></li>
+            <li><MailIcon /><a target="_blank" rel="noopener noreferrer" href="mailto:nails.top.nt@gmail.com"> nails.top.nt@gmail.com</a></li>
         </ul>
     </div>
     <div class="social">
@@ -29,6 +32,8 @@ import TiktokIcon from "../icons/tiktok.astro";
         background-color: #333;
         color: #fff;
         padding: 2rem 2rem;
+        position: relative;
+        bottom: 0;
 
         display: flex;
         align-items: center;
@@ -48,10 +53,20 @@ import TiktokIcon from "../icons/tiktok.astro";
 
     .contact ul li {
         margin: 0 0 10px 0;
+
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        font-size: 16px;
     }
 
     .contact ul li i {
         margin-right: 10px;
+    }
+
+    .contact ul li a:hover {
+        border-bottom: 1px solid #fff;
     }
 
     .social h2 {
