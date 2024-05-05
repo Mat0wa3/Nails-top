@@ -5,7 +5,7 @@ import ChevronIcon from "../icons/ChevronLeft.astro";
 <section>
     <article class="calendar-header">
         <p id="current-date">Marzo 2024</p>
-        <input type="date" id="date" name="date" hidden/>
+        <input type="date" id="date" name="date" />
 
         <div class="icons">
             <span id="prev"> <ChevronIcon /> </span>
@@ -27,7 +27,7 @@ import ChevronIcon from "../icons/ChevronLeft.astro";
     </article>
 </section>
 
-<script defer is:inline>
+<script is:inline>
     let days;
     const months = [
         "Enero",
@@ -55,22 +55,16 @@ import ChevronIcon from "../icons/ChevronLeft.astro";
     document.getElementById("date").value = currentFullDate;
 
     const renderButtons = () => {
-        days.forEach((day) => {
-            day.addEventListener("click", (e) => {
-                try{
-                    if (e.target.classList.contains("inactive")) return;
-                    const selectedDate = new Date(currentYear, currentMonth, e.target.innerText);
-                    const dateString = selectedDate.toISOString().slice(0, 10);
-                    document.getElementById("date").value = dateString;
-                    days.forEach((d) => {
-                        d.classList.remove("active");
-                    });
-                    e.target.classList.add("active");
-                } catch (error) {
-                    console.log(error);
-                }
-            });
-        });
+        const handleDayClick = (e) => {
+            const target = e.target;
+            if (target.classList.contains("inactive")) return;
+            const selectedDate = new Date(currentYear, currentMonth, target.innerText);
+            const dateString = selectedDate.toISOString().slice(0, 10);
+            document.getElementById("date").value = dateString;
+            Array.from(days).forEach((d) => d.classList.remove("active"));
+            target.classList.add("active");
+        };
+        days.forEach((day) => day.addEventListener("click", handleDayClick));
     }
 
     const renderCalendar = () => {
@@ -112,16 +106,9 @@ import ChevronIcon from "../icons/ChevronLeft.astro";
 
     prevNextIcon.forEach((icon) => {
         icon.addEventListener("click", () => {
-            currentMonth =
-                icon.id === "prev" ? currentMonth - 1 : currentMonth + 1;
-            if (currentMonth < 0 || currentMonth > 11) {
-                date = new Date(currentYear, currentMonth);
-                currentYear = date.getFullYear();
-                currentMonth = date.getMonth();
-            } else {
-                date = new Date();
-            }
-
+            currentMonth += icon.id === "prev" ? -1 : 1;
+            currentMonth = (currentMonth + 12) % 12;
+            date = new Date(currentYear, currentMonth);
             renderCalendar();
         });
     });

@@ -14,48 +14,44 @@ import { Image } from "astro:assets";
 
 {
     (status === "disabled" && (
-        <>
-            <input
-                id={id}
-                class="disabled"
-                type="checkbox"
-                name={name}
-                value={value}
-                disabled
+        <input
+            id={id}
+            class="disabled"
+            type="checkbox"
+            name={name}
+            value={id}
+            disabled
+        />
+        <label for={id} class="disabled">
+            <Image
+                src={img}
+                width={200}
+                height={200}
+                alt="servicio"
+                loading={"eager"}
             />
-            <label for={id} class="disabled">
-                <Image
-                    src={img}
-                    width={200}
-                    height={200}
-                    alt="servicio"
-                    loading={"eager"}
-                />
-                <h4>{value}</h4>
-                {price && <p>${price.toLocaleString()}</p>}
-            </label>
-        </>
+            <h4>{value}</h4>
+            {price && <p>${price.toLocaleString()}</p>}
+        </label>
     )) || (
-        <>
-            <input
-                id={id}
-                type="checkbox"
-                name={name}
-                value={value}
-                class={`${price}`}
+        <input
+            id={id}
+            type="checkbox"
+            name={name}
+            value={id}
+            class={`${price}`}
+        />
+        <label for={id}>
+            <Image
+                src={img}
+                width={200}
+                height={200}
+                alt="servicio"
+                loading={"eager"}
             />
-            <label for={id}>
-                <Image
-                    src={img}
-                    width={200}
-                    height={200}
-                    alt="servicio"
-                    loading={"eager"}
-                />
-                <h4>{value}</h4>
-                {price && <p>${price.toLocaleString()}</p>}
-            </label>
-        </>
+            <h4>{value}</h4>
+            {price && <p>${price.toLocaleString()}</p>}
+        </label>
     )
 }
 
@@ -83,7 +79,7 @@ import { Image } from "astro:assets";
 
     .disabled:is(label:hover) {
         scale: 1;
-    } 
+    }
 
     label:hover {
         scale: 1.1;

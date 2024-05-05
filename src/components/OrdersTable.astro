@@ -15,6 +15,8 @@ if (!orders) {
     <section class="section-body">
         <table>
             <thead>
+                {
+                    orders.length === 0 ? <tr><td class="no-orders">No hay ordenes pendientes</td></tr> :
                 <tr>
                     <th>Cliente</th>
                     <th>Servicio</th>
@@ -25,7 +27,7 @@ if (!orders) {
                 </tr>
             </thead>
             <tbody>
-                {
+                {   
                     orders.map((order) => (
                         <tr>
                             <td>{order.name}</td>
@@ -41,6 +43,7 @@ if (!orders) {
                     ))
                 }
             </tbody>
+            }
         </table>
     </section>
 </section>
@@ -56,12 +59,18 @@ if (!orders) {
                 method: "POST",
                 body: JSON.stringify({ name: name }),
             })
-            location.reload();
+            .then(() => location.reload())
         })
     })
 </script>
 
 <style>
+    .no-orders {
+        text-align: center;
+        font-size: 1.5rem;
+        color: #333;
+    }
+
     .orders {
         width: 82vw;
         background-color: #fff5;

@@ -1,14 +1,84 @@
 ---
+const PRODUCTS = [
+    { id: 0, name: 'Pedicura tradicional', price: 18000 },
+    { id: 1, name: 'Manicura tradicional', price: 15000 },
+    { id: 2, name: 'Pedicura semipermanente', price: 35000 },
+    { id: 3, name: 'Manicura semipermanente', price: 35000 },
+    { id: 4, name: 'Press on', price: 70000 },
+    { id: 5, name: 'Forrado en acrilico', price: 45000 },
+    { id: 6, name: 'Retiro de acrilico', price: 15000 },
+    { id: 7, name: 'Retiro de semipermanentemente', price: 8000 },
+    { id: 8, name: 'Pies y manos tradicional', price: 33000 },
+    { id: 9, name: 'Pies y manos semipermanente', price: 70000 },
+    { id: 10, name: 'Pedi spa', price: 30000 },
+    { id: 11, name: 'Retoque Press on', price: 55000 },
+    { id: 12, name: 'Base ruber', price: 45000 },
+    { id: 13, name: 'Forrado con polygel', price: 50000 },
+]
+ 
 import Calendar from "./Calendar.astro";
 import FormServices from "./FormServices.astro";
 import SelectList from "./SelectList.astro";
 import UserForm from "./UserForm.astro";
-
-import { OrderList } from "@/db/orders";
-const ORDERS = await OrderList();
+ 
+import { createOrder } from "@/db/orders";
+import { Orders } from "@/db/mongodb";
+ 
+const errors = { name: "" }
+const message = { name: "" }
+ 
+if (Astro.request.method === "POST") {
+    try {
+        const body = await Astro.request.formData();
+    
+        const order: any = {
+            name: body.get("name"),
+            phone: body.get("phone"),
+            services: [],
+            date: body.get("date"),
+            time: body.get("time"),
+            status: "Pendiente",
+            manicurista: body.get("manicurista"),
+            total: 0,
+        };
+ 
+        const services = body.getAll("service");
+ 
+        for (const service of services) {
+            order.services.push({
+                id: PRODUCTS[Number(service)].id,
+                name: PRODUCTS[Number(service)].name,
+                price: PRODUCTS[Number(service)].price,
+            });
+            order.total += PRODUCTS[Number(service)].price;
+        }
+ 
+        const orders = await Orders();
+ 
+        let order_exist = await orders.findOne({ date: order.date, time: order.time, manicurista: order.manicurista });
+ 
+        if (!order_exist) {
+            await createOrder(order);
+ 
+            Astro.response.statusText = "ok";
+            Astro.response.status = 200
+ 
+            message.name += "Cita creada!"
+ 
+        }
+ 
+        if (order_exist) errors.name += "Ya existe una cita para ese horario!"
+ 
+    } catch (error) {
+        console.error(error);
+    }
+} 
+ 
 ---
 
 <form class="section-container" method="post">
+    { message.name ? <p class="success">{message.name}</p> : null }
+    { errors.name ? <p class="error">{errors.name}</p> : null }
     <section class="section-header">
         <h2>Ordena tu cita</h2>
     </section>
@@ -46,127 +116,38 @@ const ORDERS = await OrderList();
     </section>
 </form>
 
-<script is:inline define:vars={{ ORDERS }}>
-    const btn = document.querySelector(".btn");
-    const form = document.querySelector("form");
-    const manicurista = document.getElementById("manicurista");
-    const hour = document.getElementById("time");
-    const name = document.getElementById("name");
-    const phone = document.getElementById("phone");
-    const checkBoxes = document.querySelectorAll("input[name=service]");
-    btn.addEventListener("click", async (e) => {
-        e.preventDefault();
-        const atLeastOneChecked = [...checkBoxes].some((c) => c.checked);
-        const services = document.getElementsByName("service");
-        if (manicurista.value === "") {
-            alert("Selecciona un manicurista");
-            window.location.href = "#top";
-            return;
-        }
-        if (!atLeastOneChecked) {
-            alert(`Selecciona al menos un servicio`);
-            window.location.href = "#services";
-            return;
-        }
-        if (hour.value === "") {
-            alert("Selecciona una hora");
-            hour.focus();
-            return;
-        }
-        if (name.value === "") {
-            alert("Ingresa tu nombre");
-            name.focus();
-            return;
-        }
-        if (phone.value === "") {
-            alert("Ingresa tu celular");
-            phone.focus();
-            return;
-        }
-
-        const formData = new FormData(form);
-        const order = {
-            services: [],
-            date: "",
-            time: "",
-            name: "",
-            phone: "",
-            manicurista: "",
-            status: "Pendiente",
-            total: 0,
-        };
-
-        const objectDate = formData.get("date");
-        const objectTime = formData.get("time");
-        const objectName = formData.get("name");
-        const objectPhone = formData.get("phone");
-        const objectManicurista = formData.get("manicurista");
-
-        services.forEach((s) => {
-            if (s.checked) {
-                order.services.push({
-                    id: s.id,
-                    name: s.value,
-                    price: Number(s.className),
-                });
-                order.total += Number(s.className);
-            }
-        });
-
-        order.date = objectDate;
-        order.time = objectTime;
-        order.name = objectName;
-        order.phone = objectPhone;
-        order.manicurista = objectManicurista;
-
-        let dated = false;
-
-        ORDERS.forEach((o) => {
-            if (
-                o.date === objectDate &&
-                o.time === objectTime &&
-                o.manicurista === objectManicurista
-            ) {
-                dated = true;
-            }
-            return dated;
-        });
-
-        if (dated) {
-            alert(
-                "Ya hay una cita agendada a esta hora y fecha con este manicurista",
-            );
-            window.location.href = "#top";
-            return;
-        } else {
-            try {
-                await fetch("/api/orders", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(order),
-                });
-                alert("Orden registrada");
-                window.location.href = "/";
-            } catch (error) {
-                console.error(error);
-            }
-        }
-    });
-</script>
-
 <style>
+    .section-header {
+        background-color: #ccccccc0;    
+    }
+
     .section-body {
         text-align: center;
         position: relative;
         background-color: transparent;
-        background-color: #f2f2f2c0;
 
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+    }
+
+    .section-container {
+        background-color: #f2f2f2c0;
+    }    
+
+    .error {
+        color: red;
+        font-size: 1.4rem;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .success {
+        color: green;
+        font-size: 1.4rem;
+        font-weight: 700;
+        text-align: center;
     }
 
     button {
