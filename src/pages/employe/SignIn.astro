@@ -13,18 +13,11 @@ import UserSignIn from "@/components/UserSignIn.astro";
 
 <style>
     main {
-        color: #333333;
-        padding: 2rem;
-    }
-
-    section {
-        width: 100%;
-        margin-inline: auto;
-        margin: 4rem 0;
+        min-height: calc(100dvh - 18.09rem);
     }
 
     .container {
-        max-width: 1200px;
-        margin: 0 auto;
+        width: clamp(40%, 600px, 300px);
+        margin: 2rem auto;
     }
 </style>
