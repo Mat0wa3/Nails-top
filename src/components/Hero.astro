@@ -1,3 +1,7 @@
+---
+import Button from "./Button.astro"
+---
+
 <section class="hero">
     <h1>Disfruta de un momento de belleza y relajación en nuestro spa de uñas</h1>
     
@@ -5,12 +9,21 @@
         Ofrecemos una amplia gama de servicios para que tus manos y pies luzcan
         impecables.
     </p>
-    <a href="/user/date">Reserva tu cita ahora</a>
+
+    <Button link="/user/date">Reserva tu cita</Button>
 </section>
 
 <style>
     .hero {
         text-align: center;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+        border-radius: 10px;
     }
 
     .hero h1 {
@@ -24,22 +37,5 @@
         margin: 0;
         color: #fff;
         text-shadow: 0 0 6px #000;
-    }
-
-    .hero a {
-        margin-top: 0.85rem;
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #2ba18f;
-        color: #ffffff;
-        text-decoration: none;
-        font-size: 16px;
-        border-radius: 8px;
-
-        transition: background-color 0.3s ease;
-    }
-
-    .hero a:hover {
-        background-color: #208175;
     }
 </style>

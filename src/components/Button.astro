@@ -1,0 +1,69 @@
+---
+import RightArrow from '@/icons/rightArrow.astro';
+
+interface Props {
+    link?: string;
+}
+
+const { link } = Astro.props;
+---
+
+{
+    link ? (
+        <a href={link}>
+            <slot/>
+            <RightArrow />
+        </a>
+    ) : (
+        <button>
+            <slot/>
+            <RightArrow />
+        </button>
+    )
+}
+
+<style>
+    button {
+        width: fit-content;
+        background: none;
+        border: none;
+        outline: none;
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+        border-radius: 4px;
+        padding: .3rem .5rem;
+
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        background-color: var(--color-600);
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: var(--color-700);
+        }
+    }
+
+    a {
+        width: fit-content;
+        text-decoration: none;
+        color: #fff;
+        font-weight: 600;
+        border-radius: 4px;
+        padding: .3rem .5rem;
+
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        background-color: var(--color-600);
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: var(--color-700);
+        }
+
+    }
+</style>

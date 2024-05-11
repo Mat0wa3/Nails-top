@@ -3,7 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import UserSignup from "@/components/UserSignup.astro";
 ---
 
-<Layout title="Nails-top - Empleados">
+<Layout title="Nails-top - Admin">
     <main class="container">
         <section>
             <UserSignup />
@@ -13,18 +13,11 @@ import UserSignup from "@/components/UserSignup.astro";
 
 <style>
     main {
-        color: #333333;
-        padding: 2rem;
-    }
-
-    section {
-        width: 100%;
-        margin-inline: auto;
-        margin-bottom: 4rem;
+        min-height: calc(100dvh - 18.09rem);
     }
 
     .container {
-        max-width: 1200px;
-        margin: 0 auto;
+        width: clamp(40%, 600px, 300px);
+        margin: 2rem auto;
     }
 </style>

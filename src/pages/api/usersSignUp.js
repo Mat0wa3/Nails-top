@@ -1,6 +1,6 @@
 import { createUser } from '../../db/users';
 
-export const post = async ({ request }) => {
+export const POST = async ({ request }) => {
     const body = await request.json();
     const user = await createUser(body);
     return new Response(JSON.stringify(user), {
