@@ -1,0 +1,33 @@
+---
+import { getUsers } from "@/db/users";
+
+import TableComponent from "./TableComponent.astro";
+
+const users = await getUsers();
+---
+
+<TableComponent title="Empleados">
+    {
+        users === null ? <p>No hay empleados registrados</p> : (
+            <tr slot="thead">
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        )
+    }
+    <tbody slot="tbody">
+        {
+            users.map((user) => (
+                <tr>
+                    <td>{user._id}</td>
+                    <td>{user.name}</td>
+                    <td class="actions">
+                        <button id={user.id} class="edit-btn">Editar</button>
+                        <button id={user.id} class="cancel-btn">Eliminar</button>
+                    </td>
+                </tr>
+            ))
+        }
+    </tbody>
+</TableComponent>

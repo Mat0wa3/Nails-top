@@ -1,0 +1,18 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import AdminEmployes from "@/components/AdminEmployes.astro";
+---
+
+<Layout title="Nails-top - Admin">
+    <main class="container">
+        <section>
+            <AdminEmployes />
+        </section>
+    </main>
+</Layout>
+
+<style>
+    .container {
+        width: clamp(80%, 600px, 300px);
+    }
+</style>
