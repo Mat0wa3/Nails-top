@@ -9,12 +9,15 @@ const { id, type, placeholder } = Astro.props
 <style>
     .input-container {
         position: relative;
+        max-width: fit-content;
+        width: 100%;
     }
 
     span {
         position: absolute;
-        left: 6px;
-        top: 6.5px;
+        left: 8px;
+        top: 50%;
+        transform: translateY(calc(-50% - 2px));
         bottom: 0;
         color: #999;
 
@@ -22,6 +25,7 @@ const { id, type, placeholder } = Astro.props
     }
 
     input {
+        max-width: fit-content;
         width: 100%;
         outline-color: var(--color-400);
         padding: 10px 10px 10px 35px;

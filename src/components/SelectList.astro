@@ -3,7 +3,7 @@ const  { id, name, placeholder } = Astro.props
 ---
 
 <select name={name} id={id} required>
-    <option value="" selected>{placeholder}</option>
+    <option value="" disabled selected>{placeholder}</option>
     <slot />
 </select>
 
@@ -11,15 +11,8 @@ const  { id, name, placeholder } = Astro.props
     select {
         outline: none;
         padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-    }
-
-    optgroup {
-        font-weight: bold;
-    }
-
-    option {
-        font-weight: normal;
+        border-radius: 8px;
+        border: 2px solid #ccc;
+        font: inherit;
     }
 </style>

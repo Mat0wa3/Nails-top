@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import Anchor from "./Anchor.astro";
 ---
 
 <header>
@@ -16,6 +17,7 @@ import { Image } from "astro:assets";
         </picture>
     </a>
     <nav>
+        <!-- <Anchor href="/#top">Inicio</Anchor> -->
         <a href="/#top">Inicio</a>
         <a href="/#services">Servicios</a>
         <a href="/#testimonials">Testimonios</a>
@@ -92,7 +94,7 @@ import { Image } from "astro:assets";
     header {
         --_animationStartsAfter: 10vh;
         --_animationDistance: 120px;
-        --_surfaceColor: #fff5;
+        --_surfaceColor: rgba(168, 168, 168, 0.333);
 
         padding: var(--_headerPadding, 0.1rem 6.5rem);
         margin-inline: auto;
@@ -128,7 +130,7 @@ import { Image } from "astro:assets";
             --_menuTop: 6.5vh;
             --_menuLeft: 1vh;
             border-radius: 9999px;
-            box-shadow: 0 0 1.2rem #4442;
+            box-shadow: 0 0 .4rem rgba(68, 68, 68, .6);
         }
 
         100% {
@@ -195,7 +197,7 @@ import { Image } from "astro:assets";
     nav a {
         text-decoration: none;
         color: #333333;
-        font-size: clamp(11px, 2vw, 16px);
+        font-size: clamp(10px, 2vw, 16px);
         font-weight: 500;
         padding: 5px;
         border-radius: 5px;
@@ -210,7 +212,6 @@ import { Image } from "astro:assets";
     @media (max-width: 768px) {
         header {
             --_headerPadding: 0.5rem;
-            font-size: 12px;
         }
 
         .logo h3 {
