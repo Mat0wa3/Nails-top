@@ -20,13 +20,29 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
-		<div class="bg1"></div>
+		<!-- <div class="bg1"></div> -->
 		<Header />
 		<slot />
 		<Footer />
 	</body>
 </html>
 <style is:global>
+	@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+	:root {
+		--color-50: #f2fbf9;
+		--color-100: #d2f5eb;
+		--color-200: #a6e9d9;
+		--color-300: #71d7c2;
+		--color-400: #40b5a1;
+		--color-500: #2ba18f;
+		--color-600: #208175;
+		--color-700: #1d685f;
+		--color-800: #1c534e;
+		--color-900: #1b4641;
+		--color-950: #0a2927;
+	}
+
 	*, *::before, *::after {
 		box-sizing: border-box;
 	}
@@ -41,15 +57,21 @@ const { title } = Astro.props;
 	}
 
 	html {
-		font-family: system-ui, sans-serif;
+		font-family: 'Montserrat', sans-serif;
 		scroll-behavior: smooth;
+	}
+
+	input, textarea, button, select {
+		font: inherit;
 	}
 
 	body {
 		margin: 0;
 		padding: 0;
 		min-height: 100dvh;
-		background-color: #d2d2d3e4;
+		height: 100%;
+		background: rgb(166,233,217);
+		background: linear-gradient(90deg, var(--color-100) 30%, var(--color-400) 90%);
 		position: relative;
 
 		/* background-image: url(/BG2.jpg);
@@ -73,7 +95,6 @@ const { title } = Astro.props;
 
 	.section-container {
         background-color: #fff5;
-
         backdrop-filter: blur(7px);
         box-shadow: 0 .4rem .8rem #0005;
         border-radius: .8rem;
@@ -85,15 +106,15 @@ const { title } = Astro.props;
         width: 100%;
         height: 10%;
         background-color: #fff4;
-        padding: .8rem 1rem;
+        padding: .2rem 1rem;
         font-size: 1.2rem;
+		text-align: center;
 
         display: flex;
         align-items: center;
     }
 
 	.section-body {
-        width: 95%;
         background-color: #fffb;
 
         margin: .8rem auto;

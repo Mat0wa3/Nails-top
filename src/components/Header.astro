@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import Anchor from "./Anchor.astro";
 ---
 
 <header>
@@ -16,6 +17,7 @@ import { Image } from "astro:assets";
         </picture>
     </a>
     <nav>
+        <!-- <Anchor href="/#top">Inicio</Anchor> -->
         <a href="/#top">Inicio</a>
         <a href="/#services">Servicios</a>
         <a href="/#testimonials">Testimonios</a>
@@ -42,21 +44,21 @@ import { Image } from "astro:assets";
         menu.style.visibility = "visible";
     });
 
-    document.addEventListener(
-        "click",
-        () => (menu.style.visibility = "hidden"),
-    );
+    document.addEventListener("click", () => (menu.style.visibility = "hidden"));
 
     logout.addEventListener("click", () => {
         localStorage.removeItem("user-name");
         localStorage.removeItem("user-email");
         localStorage.removeItem("user-phone");
+        localStorage.removeItem("user-role");
         cookieStore.delete("user-email");
         cookieStore.delete("user-name");
         cookieStore.delete("user-phone");
+        cookieStore.delete("user-role");
         sessionStorage.removeItem("user-email");
         sessionStorage.removeItem("user-name");
         sessionStorage.removeItem("user-phone");
+        sessionStorage.removeItem("user-role");
         window.location.href = "/";
     });
 
@@ -73,9 +75,11 @@ import { Image } from "astro:assets";
             sessionStorage.setItem("user-name", localStorage.getItem("user-name"));
             sessionStorage.setItem("user-email", localStorage.getItem("user-email"));
             sessionStorage.setItem("user-phone", localStorage.getItem("user-phone"));
+            sessionStorage.setItem("user-role", localStorage.getItem("user-role"));
             cookieStore.set('user-name', localStorage.getItem("user-name"));
             cookieStore.set('user-email', localStorage.getItem("user-email"));
             cookieStore.set('user-phone', localStorage.getItem("user-phone"));
+            cookieStore.set('user-role', localStorage.getItem("user-role"));
             login.style.display = "none";
             logout.style.display = "block";
             panel.style.display = "block";
@@ -90,7 +94,7 @@ import { Image } from "astro:assets";
     header {
         --_animationStartsAfter: 10vh;
         --_animationDistance: 120px;
-        --_surfaceColor: #fff5;
+        --_surfaceColor: rgba(168, 168, 168, 0.333);
 
         padding: var(--_headerPadding, 0.1rem 6.5rem);
         margin-inline: auto;
@@ -100,6 +104,7 @@ import { Image } from "astro:assets";
         justify-content: space-between;
 
         width: var(--_headerWidth, auto);
+        max-height: 65px;
         position: sticky;
         top: -5rem;
         z-index: 1000;
@@ -125,10 +130,11 @@ import { Image } from "astro:assets";
             --_menuTop: 6.5vh;
             --_menuLeft: 1vh;
             border-radius: 9999px;
-            box-shadow: 0 0 0.2rem #4442;
+            box-shadow: 0 0 .4rem rgba(68, 68, 68, .6);
         }
 
         100% {
+            --_nav-color: #f2f2f2;
             top: 1rem;
             background-color: var(--_surfaceColor);
             box-shadow: 0 0 0.75rem hsl(0, 0%, 0% / 0.3);
@@ -147,11 +153,11 @@ import { Image } from "astro:assets";
     }
 
     .content .menu {
-        padding: 15px;
+        padding: 10px;
 
         display: flex;
         flex-direction: column;
-        gap: 5px;
+        gap: clamp(2px , 1vh, 5px);
     }
 
     .content .menu li {
@@ -185,25 +191,27 @@ import { Image } from "astro:assets";
 
     nav a {
         display: inline-block;
-        margin: 0 10px;
+        margin: 0 2px;
     }
 
     nav a {
         text-decoration: none;
         color: #333333;
-        font-size: 16px;
-        transition: color 0.3s ease;
+        font-size: clamp(10px, 2vw, 16px);
+        font-weight: 500;
+        padding: 5px;
+        border-radius: 5px;
+        line-height: 1;
+        transition: background-color 0.3s ease;
     }
 
     nav a:hover {
-        color: #2ba18f;
-        border-bottom: 1px solid #2ba18f;
+        background-color: var(--_nav-color, hsla(0, 0%, 95%, 0.4));
     }
 
     @media (max-width: 768px) {
         header {
             --_headerPadding: 0.5rem;
-            font-size: 12px;
         }
 
         .logo h3 {

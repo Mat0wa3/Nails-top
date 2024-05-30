@@ -2,10 +2,10 @@
 import ChevronIcon from "../icons/ChevronLeft.astro";
 ---
 <h4>Elige una fecha</h4>
-<section>
+<section class="calendar-container">
     <article class="calendar-header">
         <p id="current-date">Marzo 2024</p>
-        <input type="date" id="date" name="date" />
+        <input type="date" id="date" name="date" hidden required/>
 
         <div class="icons">
             <span id="prev"> <ChevronIcon /> </span>
@@ -115,7 +115,8 @@ import ChevronIcon from "../icons/ChevronLeft.astro";
 </script>
 
 <style is:inline>
-    section {
+
+    .calendar-container {
         width: min(100%, 450px);
         background-color: #fff;
         border-radius: 10px;

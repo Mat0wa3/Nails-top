@@ -6,22 +6,23 @@ import MailIcon from "@/icons/mail.astro";
 import FacebookIcon from "@/icons/facebook.astro";
 import InstagramIcon from "@/icons/instagram.astro";
 import TiktokIcon from "@/icons/tiktok.astro";
+import NewIcon from "@/icons/NewIcon.astro";
 ---
 
 <footer id="contact">
     <div class="contact">
-        <h2>Contacto</h2>
+        <h2>Contactanos</h2>
         <ul>
-            <li><MapDotIcon /><a target="_blank" rel="noopener noreferrer" href="https://maps.app.goo.gl/R7NxRzBj28wTWaUh9"> Cra 80a 112-56, Medellín, Colombia</a></li>
-            <li><WhatsappIcon /><a target="_blank" rel="noopener noreferrer" href="https://wa.me/573046078274"> +57 304 6078274</a></li>
-            <li><MailIcon /><a target="_blank" rel="noopener noreferrer" href="mailto:nails.top.nt@gmail.com"> nails.top.nt@gmail.com</a></li>
+            <li><MapDotIcon /><a target="_blank" rel="noopener noreferrer" href="https://maps.app.goo.gl/R7NxRzBj28wTWaUh9">Cra 80a 112-56, Medellín, Colombia</a></li>
+            <li><WhatsappIcon /><a target="_blank" rel="noopener noreferrer" href="https://wa.me/573046078274">+57 304 6078274</a></li>
+            <li><MailIcon /><a target="_blank" rel="noopener noreferrer" href="mailto:nails.top.nt@gmail.com">nails.top.nt@gmail.com</a></li>
         </ul>
     </div>
     <div class="social">
         <h2>Síguenos en nuestras redes sociales</h2>
         <ul>
             <li><a href="https://www.facebook.com/profile.php?id=61558026033879" target="_blank" rel="noopener noreferrer" aria-label="facebook"><FacebookIcon /></a></li>
-            <li><a href="https://www.instagram.com/nails.top.nt/" target="_blank" rel="noopener noreferrer" aria-label="instagram"><InstagramIcon /></a></li>
+            <li><a href="https://www.instagram.com/nails.top.nt/" target="_blank" rel="noopener noreferrer" aria-label="instagram"><img><InstagramIcon /></img></a></li>
             <li><a href="https://www.tiktok.com/@nailstop.nt" target="_blank" rel="noopener noreferrer" aria-label="tiktok"><TiktokIcon /></a></li>
         </ul>
     </div>
@@ -29,26 +30,27 @@ import TiktokIcon from "@/icons/tiktok.astro";
 
 <style>
     footer {
+        width: 100%;
         background-color: #333;
         color: #fff;
-        padding: 2rem 2rem;
-        position: relative;
-        bottom: 0;
+        padding: 1rem 1rem;
+        position: static;
+        top: 100%;
+        max-height: 10rem;
 
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 1rem;
     }
 
     .contact h2 {
-        font-size: 24px;
-        margin: 0 0 40px 0;
+        font-size: clamp(16px, 2vw, 24px);
+        margin: 0 0 20px 0;
     }
 
     .contact ul {
         list-style: none;
-        margin: 0;
-        padding: 0;
     }
 
     .contact ul li {
@@ -58,19 +60,22 @@ import TiktokIcon from "@/icons/tiktok.astro";
         align-items: center;
         gap: 10px;
 
-        font-size: 16px;
+        font-size: clamp(11px, 2vw, 16px);
+        font-weight: 500;
+        line-height: 1;
     }
 
-    .contact ul li i {
-        margin-right: 10px;
+    .contact ul li a {
+        transition: scale 0.3s ease;
     }
 
     .contact ul li a:hover {
-        border-bottom: 1px solid #fff;
+        scale: 1.05;
+        color: var(--color-400);
     }
 
     .social h2 {
-        font-size: 24px;
+        font-size: clamp(16px, 2vw, 24px);
         margin: 0 0 20px 0;
     }
 
@@ -85,13 +90,8 @@ import TiktokIcon from "@/icons/tiktok.astro";
         margin: 0 10px;
     }
 
-    .social ul li a {
-        color: #ffffff;
-        text-decoration: none;
-    }
-
     .social ul li a:hover {
-        color: #208174;
+        color: var(--color-400);
     }
 
     /* Media queries */

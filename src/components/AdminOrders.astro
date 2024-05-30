@@ -1,0 +1,46 @@
+---
+import { OrderList } from "@/db/orders"
+
+import TableComponent from "./TableComponent.astro"
+
+const orders = await OrderList();
+---
+
+<TableComponent title="Citas">
+    {
+        orders === null ? <p>No hay ordenes pendientes</p> : (
+            <tr slot="thead">
+                <th>Id</th>
+                <th>Cliente</th>
+                <th>Manicurista</th>
+                <th>Servicios</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Precio</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        )
+    }
+
+    <tbody slot="tbody">
+        {
+            orders.map((order) => (
+                <tr>
+                    <td>{order._id}</td>
+                    <td>{order.name}</td>
+                    <td>{order.manicurista}</td>
+                    <td>{order.services.map((service: any, index: any) => (index === order.services.length - 1 ? `${service.name}` : `${service.name}, `))}</td>
+                    <td>{order.date}</td>
+                    <td>{order.time}</td>
+                    <td>${(order.total).toLocaleString()}</td>
+                    <td>{order.status}</td>
+                    <td class="actions">
+                        <button>Editar</button>
+                        <button>Cancelar</button>
+                    </td>
+                </tr>
+            ))
+        }
+    </tbody>
+</TableComponent>
