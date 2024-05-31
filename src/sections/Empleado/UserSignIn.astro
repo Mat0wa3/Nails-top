@@ -1,5 +1,5 @@
 ---
-import InputField from "./InputField.astro";
+import InputField from "../../components/UI/InputField.astro";
 
 import UserIcon from "@/icons/user.astro";
 import KeyIcon from "@/icons/key.astro";
@@ -62,7 +62,7 @@ import KeyIcon from "@/icons/key.astro";
                     sessionStorage.setItem("user-role", data.user.role);
                 });
                 alert("Inicio de sesión exitoso");
-                window.location.href = "/employe/";
+                window.location.href = "/empleados/";
             } else {
                 alert("Credenciales incorrectas");
             }

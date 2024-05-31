@@ -1,0 +1,24 @@
+---
+import DashboardEmpleados from "@/sections/Empleado/DashboardEmpleados.astro"
+import Ingresar from "@/sections/Empleado/SignIn.astro"
+import Registrar from "@/sections/Empleado/Signup.astro"
+import Orders from "@/sections/Empleado/Orders.astro"
+import Index from "@/pages/empleados/index.astro"
+
+export function getStaticPaths() {
+    
+    return [
+        {params: {path: 'ingresar'}},
+        {params: {path: 'registrar'}},
+        {params: {path: 'ordenes'}},
+        {params: {path: 'factura'}},
+        {params: {path: 'admin'}}
+    ];
+}
+
+const { path } = Astro.params
+---
+
+{
+    path === "admin" ? <DashboardEmpleados /> : path === "ingresar" ? <Ingresar /> : path === "registrar" ? <Registrar /> : path === "ordenes"? <Orders /> : path === "" ? <Index /> : <h1>EROR 404 PAGINA NO ENCONTRADA!</h1>
+}
