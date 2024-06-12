@@ -1,0 +1,272 @@
+---
+import UserIcon from "@/icons/user.astro"
+import EmployeIcon from "@/icons/Employe.astro"
+import HomeIcon from "@/icons/Home.astro"
+import CalendarIcon from "@/icons/Calendar.astro"
+import LogoutIcon from "@/icons/Logout.astro"
+import MenuIcon from "@/icons/Menu.astro"
+---
+<aside>
+
+    <div class="menu"><MenuIcon/></div>
+
+    <section id="menu" class="header">
+        <img src="/Nails-top_icon.webp" alt="">
+        <span>Nails-top</span>
+    </section>
+
+    <nav>
+        <ul>
+            <li><a href="/empleados/"><icon><HomeIcon/></icon><span>Inicio</span></a></li>
+            <li><a href="/empleados/registrar"><icon><UserIcon/></icon><span>Crear usuarios</span></a></li>
+            <li><a href="/empleados/ordenes"><icon><CalendarIcon/></icon><span>Ver citas</sp></a></li>
+            <li><a href="/empleados/admin"><icon><EmployeIcon/></icon><span>Ver empleados</span></a></li>
+        </ul>
+    </nav>
+
+    <div class="linea"></div>
+
+    <section class="footer">
+        <img src="/BG.jpg" alt="">
+        <article>
+            <div class="nombre">
+                <span>Mateo</span>
+            </div>
+            <a id="logout" href="#logout"><icon><LogoutIcon/></icon></a>
+        </article>
+    </section>
+</aside>
+
+<script is:inline>
+    const bar = document.querySelector("aside")
+    const menu = document.getElementById("menu")
+    const span = document.querySelectorAll("span")
+    const bars = document.querySelector(".menu")
+    const logout = document.getElementById("logout")
+
+    bars?.addEventListener("click", () => {
+        bar?.classList.toggle("active")
+    })
+
+    menu?.addEventListener("click", () => {
+        bar?.classList.toggle("unactive")
+
+        span?.forEach(element => {
+            element.classList.toggle("oculto")
+        });
+    })
+
+    logout?.addEventListener("click", () => {
+        localStorage.removeItem("user-name");
+        localStorage.removeItem("user-email");
+        localStorage.removeItem("user-phone");
+        localStorage.removeItem("user-role");
+        cookieStore.delete("user-email");
+        cookieStore.delete("user-name");
+        cookieStore.delete("user-phone");
+        cookieStore.delete("user-role");
+        sessionStorage.removeItem("user-email");
+        sessionStorage.removeItem("user-name");
+        sessionStorage.removeItem("user-phone");
+        sessionStorage.removeItem("user-role");
+        window.location.href = "/";
+    })
+</script>
+
+<style>
+
+    /* Estilos generales */
+
+    .menu {
+        position: fixed;
+        width: 50px;
+        height: 50px;
+        background-color: #000;
+        color: #fff;
+        border-radius: 9999px;
+        cursor: pointer;
+        right: 15px;
+        top: 15px;
+
+        display: none;
+        align-items: center;
+        justify-content: center;
+    }
+
+    aside {
+        /* border: 2px solid red; */
+        height: 100dvh;
+        padding: 20px 15px;
+        background-color: rgb(216, 216, 216);
+        max-width: 250px;
+        width: 100%;
+        transition: width .5s ease, left .5s ease;
+        position: sticky;
+        top: 0;
+        left: 0;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    section {
+        /* border: 2px solid blue; */
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* Estilos de header */
+
+    .header {
+        cursor: pointer;
+    }
+
+    .header img{
+        width: 50px;
+        height: 50px;
+    }
+
+    .header p {
+        font-size: 22px;
+    }
+
+    /* Estilos de menu de navegación */
+
+    nav {
+        width: 100%;
+        margin-top: 7rem;
+        margin-bottom: 4rem;
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    nav::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    nav::-webkit-scrollbar-thumb {
+        background-color: #0003;
+        border-radius: 5px;
+    }
+
+    nav li {
+        /* border: 2px solid green; */
+        list-style: none;
+        display: flex;
+        margin-bottom: 5px;
+    }
+
+    nav ul li a {
+        width: 100%;
+        height: 45px;
+        color: #888;
+        text-decoration: none;
+        border-radius: 10px;
+        transition: color .3s ease, background-color .3s ease;
+
+        display: flex;
+        align-items: center;
+    }
+
+    nav ul li a:hover {
+        color: #333;
+        background-color: #8885;
+    }
+
+    nav ul li a icon > * {
+        min-width: 50px;
+    }
+
+    .linea {
+        width: 100%;
+        height: 1px;
+        background-color: #b3b3b3;
+        margin-bottom: 80px;
+    }
+
+    /* Estilos del footer */
+
+    .footer {
+        width: 100%;
+
+        display: flex;
+    }
+
+    .footer img {
+        width: 50px;
+        min-width: 50px;
+        border-radius: 10px;
+    }
+
+    .footer article {
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #333;
+        overflow: hidden;
+    }
+
+    .footer article .nombre {
+        width: 100%;
+        font-size: 15px;
+        font-weight: 600;
+
+        display: flex;
+        flex-direction: column;
+        margin-left: 5px;
+    }
+
+    .footer a {
+        text-decoration: none;
+        color: #333;
+        transition: scale .3s ease;
+    }
+
+    .footer a:hover {
+        scale: 1.2;
+    }
+
+    /* Variantes */
+
+    span {
+        transition: opacity .5s ease;
+    }
+
+    .active {
+        left: 0;
+
+    }
+
+    .unactive {
+        width: 80px;
+    }
+
+    .oculto {
+        opacity: 0;
+        scale: 0;
+        width: 0;
+    }
+
+    /* Responsive design */
+
+    @media (width <= 600px) {
+        aside {
+            display: flex;
+            position: absolute;
+
+            left: -250px;
+        }
+
+        .menu {
+            display: flex;
+        }
+    }
+</style>

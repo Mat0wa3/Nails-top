@@ -1,0 +1,33 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Button from "@/components/UI/Button.astro";
+---
+
+<Layout title="Pagina no encontrada!">
+    <main>
+        <section>
+            <h1>ERROR 404</h1>
+            <h3>Creo que no estas en el lugar indicado.</h3>
+            <Button link="/">Volver a la pagina principal</Button>
+        </section>
+    </main>
+</Layout>
+
+<style>
+    main {
+        min-height: calc(100dvh - 10rem - 4rem);
+        display: grid;
+        place-items: center;
+    }
+
+    section {
+        background-color: #fff5;
+        padding: 4rem;
+        border-radius: 10px;
+        color: #333;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+</style>

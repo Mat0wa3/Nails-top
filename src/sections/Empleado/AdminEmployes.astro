@@ -1,11 +1,10 @@
 ---
 import { getUsers } from "@/db/users";
 
-import TableComponent from "../UI/TableComponent.astro";
+import TableComponent from "@/components/UI/TableComponent.astro";
 
 const users = await getUsers();
 ---
-
 <TableComponent title="Empleados">
     {
         users === null ? <p>No hay empleados registrados</p> : (

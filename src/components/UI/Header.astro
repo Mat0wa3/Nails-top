@@ -12,7 +12,7 @@ import { Image } from "astro:assets";
                 height={48}
                 loading={"eager"}
             />
-            <h3>Nails-top</h3>
+            <p>Nails-top</p>
         </picture>
     </a>
     <nav>
@@ -93,7 +93,7 @@ import { Image } from "astro:assets";
     header {
         --_animationStartsAfter: 10vh;
         --_animationDistance: 120px;
-        --_surfaceColor: rgba(168, 168, 168, 0.333);
+        --_surfaceColor: #f2f2f2;
 
         padding: var(--_headerPadding, 0.1rem 6.5rem);
         margin-inline: auto;
@@ -102,8 +102,8 @@ import { Image } from "astro:assets";
         align-items: center;
         justify-content: space-between;
 
-        width: var(--_headerWidth, auto);
-        max-height: 65px;
+        width: var(--_headerWidth, 100%);
+        max-height: var(--header-height);
         position: sticky;
         top: -5rem;
         z-index: 1000;
@@ -195,17 +195,17 @@ import { Image } from "astro:assets";
 
     nav a {
         text-decoration: none;
-        color: #333333;
+        color: var(--secondary);
         font-size: clamp(10px, 2vw, 16px);
-        font-weight: 500;
+        font-weight: 600;
         padding: 5px;
         border-radius: 5px;
         line-height: 1;
-        transition: background-color 0.3s ease;
+        transition: color 0.3s ease;
     }
 
     nav a:hover {
-        background-color: var(--_nav-color, hsla(0, 0%, 95%, 0.4));
+        color: var(--accent-hover);
     }
 
     @media (max-width: 768px) {

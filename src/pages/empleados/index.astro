@@ -1,7 +1,7 @@
 ---
-import OrdersTable from "@/sections/Empleado/OrdersTable.astro";
-import Layout from "@/layouts/Layout.astro";
-import AdminDashboard from "@/sections/Empleado/AdminDashboard.astro";
+import OrdersTable from "@/components/Empleados/OrdersTable.astro";
+import Layout from "@/layouts/DashboardLayout.astro";
+import AdminDashboard from "@/components/Empleados/Dashboard.astro";
 
 const role = Astro.cookies.get("user-role");
 ---
@@ -19,15 +19,14 @@ const role = Astro.cookies.get("user-role");
 <style>
     section {
         width: 100%;
-        margin-inline: auto;
-        margin-bottom: 4rem;
+        min-height: calc(100dvh - 10rem - 4rem);
+        height: 100%;
     }
     
     .container {
         max-width: 1200px;
+        width: 100%;
         margin: 0 auto;
-        color: #333333;
-        padding-inline: 2rem;
-        min-height: calc(100dvh - 18.09rem);
+        color: #333;
     }
 </style>

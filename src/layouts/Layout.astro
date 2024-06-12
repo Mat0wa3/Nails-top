@@ -20,7 +20,6 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
-		<!-- <div class="bg1"></div> -->
 		<Header />
 		<slot />
 		<Footer />
@@ -29,19 +28,12 @@ const { title } = Astro.props;
 <style is:global>
 	@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-	:root {
-		--color-50: #f2fbf9;
-		--color-100: #d2f5eb;
-		--color-200: #a6e9d9;
-		--color-300: #71d7c2;
-		--color-400: #40b5a1;
-		--color-500: #2ba18f;
-		--color-600: #208175;
-		--color-700: #1d685f;
-		--color-800: #1c534e;
-		--color-900: #1b4641;
-		--color-950: #0a2927;
-	}
+    :root {
+        --primary: #f5f5f5;
+        --secondary: #4a4a4a;
+        --accent: #0ac285;
+        --accent-hover: #12a171;
+    }
 
 	*, *::before, *::after {
 		box-sizing: border-box;
@@ -61,7 +53,7 @@ const { title } = Astro.props;
 		scroll-behavior: smooth;
 	}
 
-	input, textarea, button, select {
+	input, textarea, button, select, a {
 		font: inherit;
 	}
 
@@ -70,9 +62,11 @@ const { title } = Astro.props;
 		padding: 0;
 		min-height: 100dvh;
 		height: 100%;
-		background: rgb(166,233,217);
-		background: linear-gradient(90deg, var(--color-100) 30%, var(--color-400) 90%);
+		background: var(--primary);
 		position: relative;
+
+		display: flex;
+		flex-direction: column;
 
 		/* background-image: url(/BG2.jpg);
 		background-size: cover; */
@@ -120,26 +114,6 @@ const { title } = Astro.props;
         margin: .8rem auto;
         border-radius: .6rem;
 	}
-
-	.bg1 {
-        background-color: #fff;
-        background-image: url(/BG.jpg);
-        background-size: cover;
-		height: 100%;
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		top: 0;
-    }
-
-	.bg2 {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        top: 0;
-    }
 
 	@media (prefers-reduced-motion: reduce) {
 		html {
